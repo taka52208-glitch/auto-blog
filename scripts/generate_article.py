@@ -10,6 +10,7 @@ import json
 import datetime
 import random
 import urllib.request
+import urllib.parse
 from pathlib import Path
 
 
@@ -44,21 +45,61 @@ def get_fallback_keywords():
     return random.sample(topics, 5)
 
 
+def search_keyword_info(keyword):
+    """WikipediaとGoogle検索でキーワードの正確な情報を取得"""
+    info = ""
+
+    # Wikipedia日本語版で検索
+    try:
+        wiki_url = f"https://ja.wikipedia.org/api/rest_v1/page/summary/{urllib.parse.quote(keyword)}"
+        req = urllib.request.Request(wiki_url, headers={"User-Agent": "AutoBlog/1.0"})
+        with urllib.request.urlopen(req, timeout=10) as response:
+            data = json.loads(response.read().decode("utf-8"))
+            if "extract" in data:
+                info += f"Wikipedia情報: {data['extract']}\n"
+    except Exception as e:
+        print(f"Wikipedia検索エラー: {e}")
+
+    # DuckDuckGo Instant Answerで追加情報
+    try:
+        ddg_url = f"https://api.duckduckgo.com/?q={urllib.parse.quote(keyword)}&format=json&no_html=1"
+        req = urllib.request.Request(ddg_url, headers={"User-Agent": "AutoBlog/1.0"})
+        with urllib.request.urlopen(req, timeout=10) as response:
+            data = json.loads(response.read().decode("utf-8"))
+            if data.get("Abstract"):
+                info += f"概要: {data['Abstract']}\n"
+            if data.get("RelatedTopics"):
+                topics = [t.get("Text", "") for t in data["RelatedTopics"][:3] if isinstance(t, dict)]
+                if topics:
+                    info += f"関連情報: {'; '.join(topics)}\n"
+    except Exception as e:
+        print(f"DuckDuckGo検索エラー: {e}")
+
+    return info if info else f"（{keyword}に関する事前情報は取得できませんでした）"
+
+
 def generate_article_with_ai(keyword):
     """Groq API（無料）で記事を生成"""
     api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
         raise ValueError("GROQ_API_KEY が設定されていません")
 
+    # まずキーワードの正確な情報を取得
+    print(f"キーワード情報を検索中: {keyword}")
+    keyword_info = search_keyword_info(keyword)
+    print(f"取得した情報: {keyword_info[:200]}")
+
     prompt = f"""以下のキーワードについて、SEOに最適化された日本語のブログ記事を書いてください。
 
 キーワード: {keyword}
 
+このキーワードについての事実情報:
+{keyword_info}
+
 重要な注意:
-- このキーワードはGoogleトレンドの急上昇ワードです
-- まず、このキーワードが何を指すのか（人名、イベント、商品、ニュースなど）を正しく判断してください
-- 人名の場合は、その人物のプロフィ��ルや最近の話題について書いてください
-- 間違った解釈で記事を書かないでください
+- 上記の事実情報に基づいて正確な記事を書いてください
+- 事実情報がない場合は、一般的な内容にとどめ、嘘の情報を書かないでください
+- 確信が持てない具体的な数字や事実は書かないでください
 
 要件:
 - タイトルはクリックしたくなるもの（32文字以内）
