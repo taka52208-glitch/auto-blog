@@ -1,8 +1,8 @@
 """
-自動記事生成スクリプト
-- トレンドキーワードを取得
-- Groq API（無料）で記事を生成
-- Hugoの記事ファイルとして保存
+自動記事生成スクリプト（AIツール特化版）
+- AIツール関連のロングテールキーワードを選定
+- 比較・レビュー・使い方記事を生成
+- アフィリエイトリンク付きで収益化
 """
 
 import os
@@ -14,120 +14,186 @@ import urllib.parse
 from pathlib import Path
 
 
-def get_trending_keywords():
-    """Googleトレンドから急上昇キーワードを取得"""
-    url = "https://trends.google.co.jp/trending/rss?geo=JP"
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=10) as response:
-            data = response.read().decode("utf-8")
-            keywords = []
-            for line in data.split("<title>"):
-                if "</title>" in line:
-                    kw = line.split("</title>")[0].strip()
-                    if kw and kw != "Daily Search Trends":
-                        keywords.append(kw)
-            return keywords[:10]
-    except Exception as e:
-        print(f"トレンド取得エラー: {e}")
-        return get_fallback_keywords()
+# AIツール関連のロングテールキーワード（検索ボリュームあり・競合少ない）
+ARTICLE_TEMPLATES = [
+    # 比較系（成約率高い）
+    {"keyword": "ChatGPT 無料版 有料版 違い", "type": "comparison"},
+    {"keyword": "Claude ChatGPT 比較 どっち", "type": "comparison"},
+    {"keyword": "Gemini ChatGPT 違い 2026", "type": "comparison"},
+    {"keyword": "AI文章作成ツール おすすめ 無料", "type": "ranking"},
+    {"keyword": "AI画像生成 無料 おすすめ 比較", "type": "ranking"},
+    {"keyword": "AIライティングツール 比較 ブログ", "type": "ranking"},
+    {"keyword": "AI翻訳 DeepL ChatGPT 比較", "type": "comparison"},
+    {"keyword": "AI議事録ツール 無料 おすすめ", "type": "ranking"},
+    {"keyword": "AIプレゼン作成ツール 比較", "type": "ranking"},
+    {"keyword": "AI要約ツール 無料 使い方", "type": "howto"},
+    # 使い方系（流入多い）
+    {"keyword": "ChatGPT 使い方 初心者 始め方", "type": "howto"},
+    {"keyword": "Claude 使い方 コツ プロンプト", "type": "howto"},
+    {"keyword": "Midjourney 使い方 日本語 初心者", "type": "howto"},
+    {"keyword": "Stable Diffusion 無料 使い方", "type": "howto"},
+    {"keyword": "ChatGPT プロンプト 仕事 効率化", "type": "howto"},
+    {"keyword": "AI副業 始め方 初心者 稼ぎ方", "type": "howto"},
+    {"keyword": "ChatGPT ブログ記事 書き方 コツ", "type": "howto"},
+    {"keyword": "AI 英語学習 おすすめ 方法", "type": "howto"},
+    {"keyword": "ChatGPT Excel 活用 関数", "type": "howto"},
+    {"keyword": "AI 動画編集 無料 おすすめ", "type": "ranking"},
+    # 悩み解決系（検索意図が明確）
+    {"keyword": "ChatGPT 料金 高い 節約方法", "type": "problem"},
+    {"keyword": "AI 仕事 奪われる 対策 スキル", "type": "problem"},
+    {"keyword": "ChatGPT 使えない 制限 代替", "type": "problem"},
+    {"keyword": "AI ツール 多すぎ どれ 選ぶ", "type": "problem"},
+    {"keyword": "Notion AI 料金 無料 代替", "type": "problem"},
+    # 最新情報系
+    {"keyword": "ChatGPT 最新機能 アップデート", "type": "news"},
+    {"keyword": "Claude 新機能 できること", "type": "news"},
+    {"keyword": "Google Gemini 最新 使い方", "type": "news"},
+    {"keyword": "AI 最新ニュース まとめ", "type": "news"},
+    {"keyword": "GPT-5 いつ 性能 予想", "type": "news"},
+]
 
 
-def get_fallback_keywords():
-    """トレンド取得失敗時のフォールバックキーワード"""
-    topics = [
-        "時短術", "節約方法", "副業", "AI活用", "健康習慣",
-        "睡眠改善", "集中力", "ストレス解消", "自己投資", "朝活",
-        "ミニマリスト", "作り置きレシピ", "掃除術", "防災グッズ",
-        "スマホ活用術", "読書術", "筋トレ", "瞑想", "家計管理",
-        "転職準備", "資格勉強", "プレゼン術", "人間関係", "習慣化"
-    ]
-    return random.sample(topics, 5)
+def get_published_keywords():
+    """既に投稿済みのキーワードを取得して重複を避ける"""
+    posts_dir = Path(__file__).parent.parent / "content" / "posts"
+    published = set()
+    if posts_dir.exists():
+        for f in posts_dir.glob("*.md"):
+            if f.name != ".gitkeep":
+                published.add(f.stem.split("-", 3)[-1] if f.stem.count("-") >= 3 else f.stem)
+    return published
+
+
+def select_keyword():
+    """未投稿のキーワードからランダムに1つ選択"""
+    published = get_published_keywords()
+    available = [t for t in ARTICLE_TEMPLATES if t["keyword"].replace(" ", "-").lower() not in published]
+    if not available:
+        # 全部投稿済みの場合はランダムに選ぶ（更新記事として）
+        available = ARTICLE_TEMPLATES
+    return random.choice(available)
 
 
 def search_keyword_info(keyword):
-    """WikipediaとGoogle検索でキーワードの正確な情報を取得"""
+    """DuckDuckGoで関連情報を取得"""
     info = ""
-
-    # Wikipedia日本語版で検索
-    try:
-        wiki_url = f"https://ja.wikipedia.org/api/rest_v1/page/summary/{urllib.parse.quote(keyword)}"
-        req = urllib.request.Request(wiki_url, headers={"User-Agent": "AutoBlog/1.0"})
-        with urllib.request.urlopen(req, timeout=10) as response:
-            data = json.loads(response.read().decode("utf-8"))
-            if "extract" in data:
-                info += f"Wikipedia情報: {data['extract']}\n"
-    except Exception as e:
-        print(f"Wikipedia検索エラー: {e}")
-
-    # DuckDuckGo Instant Answerで追加情報
     try:
         ddg_url = f"https://api.duckduckgo.com/?q={urllib.parse.quote(keyword)}&format=json&no_html=1"
         req = urllib.request.Request(ddg_url, headers={"User-Agent": "AutoBlog/1.0"})
         with urllib.request.urlopen(req, timeout=10) as response:
             data = json.loads(response.read().decode("utf-8"))
             if data.get("Abstract"):
-                info += f"概要: {data['Abstract']}\n"
+                info += f"{data['Abstract']}\n"
             if data.get("RelatedTopics"):
-                topics = [t.get("Text", "") for t in data["RelatedTopics"][:3] if isinstance(t, dict)]
+                topics = [t.get("Text", "") for t in data["RelatedTopics"][:5] if isinstance(t, dict)]
                 if topics:
-                    info += f"関連情報: {'; '.join(topics)}\n"
+                    info += f"関連: {'; '.join(topics)}\n"
     except Exception as e:
-        print(f"DuckDuckGo検索エラー: {e}")
+        print(f"検索エラー: {e}")
+    return info
 
-    return info if info else f"（{keyword}に関する事前情報は取得できませんでした）"
+
+def get_prompt_by_type(keyword, article_type, keyword_info):
+    """記事タイプに応じたプロンプトを生成"""
+
+    base_rules = """
+## 文体ルール
+- 話しかけるような親しみやすい口調（「〜ですよね」「ぶっちゃけ」「実は」）
+- 短い文でテンポよく
+- 具体的な数字や例を入れる
+- 読者が「へぇ」と思う意外な情報を1つ入れる
+
+## SEOルール
+- h2は3〜5個、h3は各h2の下に1〜3個
+- キーワードを自然にh2に含める
+- 冒頭100文字以内にキーワードを入れる
+- 最後に「まとめ」と「次のアクション」
+
+## 収益化
+- 記事内で紹介するツールの公式サイトへのリンクを[ツール名](公式URL)形式で入れる
+- 「無料で試せる」「今なら〇〇」などのCTAを自然に入れる
+
+## 禁止
+- 嘘の情報・確信のない数字
+- 他サイトのコピペ感
+- 「〜です。〜です。」の単調な繰り返し
+- 1文が60文字を超える長文
+
+## 出力形式
+---
+title: "タイトル（32文字以内・数字か疑問形入り）"
+description: "メタディスクリプション（120文字以内）"
+---
+
+本文（2000〜3000文字）
+"""
+
+    if article_type == "comparison":
+        specific = f"""
+## 記事の構成
+1. 結論を最初に書く（「○○な人は△△、□□な人は××がおすすめ」）
+2. 比較表（料金・機能・使いやすさ）をマークダウンテーブルで
+3. 各ツールの強み・弱みを具体的に
+4. 用途別のおすすめを提示
+5. まとめ
+"""
+    elif article_type == "ranking":
+        specific = f"""
+## 記事の構成
+1. ランキング結果を冒頭で一覧表示
+2. 各ツールを「おすすめ度」「料金」「特徴」で紹介
+3. 選ぶ基準を3つ提示
+4. 用途別おすすめ
+5. まとめ
+"""
+    elif article_type == "howto":
+        specific = f"""
+## 記事の構成
+1. この記事を読むとできるようになることを最初に書く
+2. 手順をステップ形式（Step1, Step2...）で
+3. よくある失敗と対策
+4. 上級者向けのコツを1つ
+5. まとめ
+"""
+    elif article_type == "problem":
+        specific = f"""
+## 記事の構成
+1. 読者の悩みに共感する冒頭
+2. 原因を簡潔に説明
+3. 解決策を3つ提示（具体的に）
+4. おすすめの代替ツール
+5. まとめ
+"""
+    else:  # news
+        specific = f"""
+## 記事の構成
+1. 最新情報のポイントを3行で
+2. 何が変わったのか詳しく
+3. ユーザーへの影響
+4. 今後の予測
+5. まとめ
+"""
+
+    return f"""あなたは月間10万PVのAIツールブロガーです。以下のキーワードで検索する読者に向けて、読んで「役に立った」と思える記事を書いてください。
+
+キーワード: {keyword}
+記事タイプ: {article_type}
+
+参考情報:
+{keyword_info}
+
+{specific}
+{base_rules}
+"""
 
 
-def generate_article_with_ai(keyword):
+def generate_article_with_ai(keyword, article_type, keyword_info):
     """Groq API（無料）で記事を生成"""
     api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
         raise ValueError("GROQ_API_KEY が設定されていません")
 
-    # まずキーワードの正確な情報を取得
-    print(f"キーワード情報を検索中: {keyword}")
-    keyword_info = search_keyword_info(keyword)
-    print(f"取得した情報: {keyword_info[:200]}")
-
-    prompt = f"""あなたは人気ブロガーです。以下のトレンドキーワードについて、読者が「読んでよかった」と思える記事を書いてください。
-
-キーワード: {keyword}
-
-このキーワードについての事実情報:
-{keyword_info}
-
-## 記事の方針
-
-1. まず「なぜ今このキーワードが話題なのか？」を考えて冒頭で触れる
-2. 読者が検索する理由（知りたいこと）を3つ想定し、それぞれに答える
-3. 他のサイトにはない「独自の切り口」を1つ入れる（例: 比較、ランキング、意外な事実、今後の予測）
-4. 具体的なアクション（読者が次にやるべきこと）を最後に提示する
-
-## 禁止事項
-- Wikipediaのコピペのような羅列記事
-- 「〜です。〜です。」の単調な繰り返し
-- 確信のない事実や数字の捏造
-- 当たり障りのないまとめ
-
-## 文体
-- 話しかけるような親しみやすい文体
-- 「ぶっちゃけ」「実は」「意外と知られていないのが」などのフックを使う
-- 短い文を多用してテンポよく
-
-## フォーマット
-- タイトル: 思わずクリックしたくなる（32文字以内）、数字や疑問形を活用
-- 1500〜2500文字
-- h2, h3で構造化
-- マークダウン形式
-
-出力形式:
----
-title: "記事タイトル"
-description: "メタディスクリプション（120文字以内）"
----
-
-本文をここに書く
-"""
+    prompt = get_prompt_by_type(keyword, article_type, keyword_info)
 
     request_body = json.dumps({
         "model": "llama-3.3-70b-versatile",
@@ -159,7 +225,7 @@ description: "メタディスクリプション（120文字以内）"
 def save_article(content, keyword):
     """記事をHugoのコンテンツとして保存"""
     today = datetime.date.today().isoformat()
-    slug = keyword.replace(" ", "-").replace("　", "-").lower()
+    slug = keyword.replace(" ", "-").lower()
     filename = f"{today}-{slug}.md"
 
     posts_dir = Path(__file__).parent.parent / "content" / "posts"
@@ -167,24 +233,28 @@ def save_article(content, keyword):
 
     filepath = posts_dir / filename
 
-    # frontmatter に日付を追加
+    # frontmatter処理
     if "---" in content:
         parts = content.split("---", 2)
         if len(parts) >= 3:
             frontmatter = parts[1]
             body = parts[2]
-            frontmatter += f'\ndate: "{today}"\n'
-            frontmatter += f'categories: ["トレンド"]\n'
-            frontmatter += f'tags: ["{keyword}"]\n'
+            if "date:" not in frontmatter:
+                frontmatter += f'\ndate: "{today}"\n'
+            if "categories:" not in frontmatter:
+                frontmatter += f'categories: ["AIツール"]\n'
+            if "tags:" not in frontmatter:
+                tags = [k for k in keyword.split() if len(k) > 1][:3]
+                frontmatter += f'tags: {json.dumps(tags, ensure_ascii=False)}\n'
             content = f"---{frontmatter}---{body}"
     else:
-        # frontmatterがない場合は自動付与
+        tags = [k for k in keyword.split() if len(k) > 1][:3]
         content = f"""---
-title: "{keyword}について知っておきたいこと"
+title: "{keyword}"
 description: "{keyword}に関する最新情報をわかりやすく解説"
 date: "{today}"
-categories: ["トレンド"]
-tags: ["{keyword}"]
+categories: ["AIツール"]
+tags: {json.dumps(tags, ensure_ascii=False)}
 ---
 
 {content}"""
@@ -195,20 +265,23 @@ tags: ["{keyword}"]
 
 
 def main():
-    print("=== 自動記事生成開始 ===")
+    print("=== AI Tools Lab 記事生成 ===")
     print(f"日時: {datetime.datetime.now()}")
 
-    # 1. トレンドキーワード取得
-    keywords = get_trending_keywords()
-    print(f"取得キーワード: {keywords}")
+    # 1. キーワード選定
+    template = select_keyword()
+    keyword = template["keyword"]
+    article_type = template["type"]
+    print(f"キーワード: {keyword}")
+    print(f"記事タイプ: {article_type}")
 
-    # 2. ランダムに1つ選択
-    keyword = random.choice(keywords)
-    print(f"選択キーワード: {keyword}")
+    # 2. 関連情報検索
+    print("関連情報を検索中...")
+    keyword_info = search_keyword_info(keyword)
 
     # 3. 記事生成
     print("記事生成中...")
-    article = generate_article_with_ai(keyword)
+    article = generate_article_with_ai(keyword, article_type, keyword_info)
 
     # 4. 保存
     save_article(article, keyword)

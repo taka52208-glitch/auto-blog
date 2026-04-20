@@ -1,11 +1,25 @@
 baseURL = "https://taka52208-glitch.github.io/auto-blog/"
 languageCode = "ja"
-title = "トレンドまとめブログ"
+title = "AI Tools Lab - AIツール比較＆活用ガイド"
 theme = "ananke"
 
 [params]
-  description = "毎日更新！最新トレンド情報をわかりやすくまとめています"
-  author = "管理人"
+  description = "ChatGPT・Claude・Gemini等のAIツールを徹底比較。使い方・料金・活用術をわかりやすく解説。"
+  author = "AI Tools Lab"
+
+[menu]
+  [[menu.main]]
+    name = "ホーム"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 2
+  [[menu.main]]
+    name = "プライバシーポリシー"
+    url = "/privacy/"
+    weight = 3
 
 [markup]
   [markup.goldmark]
