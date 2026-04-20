@@ -89,9 +89,34 @@ description: "メタディスクリプション（120文字以内）"
         }
     )
 
-    with urllib.request.urlopen(req, timeout=60) as response:
-        result = json.loads(response.read().decode("utf-8"))
-        return result["content"][0]["text"]
+    try:
+        with urllib.request.urlopen(req, timeout=60) as response:
+            result = json.loads(response.read().decode("utf-8"))
+            return result["content"][0]["text"]
+    except urllib.error.HTTPError as e:
+        error_body = e.read().decode("utf-8")
+        print(f"API Error {e.code}: {error_body}")
+        # モデル名が無効な場合、フォールバック
+        if "model" in error_body.lower() or e.code == 400:
+            print("フォールバック: claude-3-haiku-20240307 を試行")
+            request_body = json.dumps({
+                "model": "claude-3-haiku-20240307",
+                "max_tokens": 4000,
+                "messages": [{"role": "user", "content": prompt}]
+            }).encode("utf-8")
+            req = urllib.request.Request(
+                "https://api.anthropic.com/v1/messages",
+                data=request_body,
+                headers={
+                    "Content-Type": "application/json",
+                    "x-api-key": api_key,
+                    "anthropic-version": "2023-06-01"
+                }
+            )
+            with urllib.request.urlopen(req, timeout=60) as response:
+                result = json.loads(response.read().decode("utf-8"))
+                return result["content"][0]["text"]
+        raise
 
 
 def save_article(content, keyword):
