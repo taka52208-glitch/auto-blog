@@ -1,0 +1,19 @@
+{{ define "main" }}
+<div class="container">
+  <h1>{{ .Site.Title }}</h1>
+  <p>{{ .Site.Params.description }}</p>
+
+  <!-- Google AdSense 広告枠（審査通過後に有効化） -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-あなたのID" crossorigin="anonymous"></script> -->
+
+  {{ range .Paginator.Pages }}
+  <article class="post-entry">
+    <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+    <time>{{ .Date.Format "2006-01-02" }}</time>
+    <p>{{ .Summary }}</p>
+  </article>
+  {{ end }}
+
+  {{ template "_internal/pagination.html" . }}
+</div>
+{{ end }}

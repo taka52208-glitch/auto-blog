@@ -1,0 +1,20 @@
+baseURL = "https://taka52208-glitch.github.io/auto-blog/"
+languageCode = "ja"
+title = "トレンドまとめブログ"
+theme = "ananke"
+
+[params]
+  description = "毎日更新！最新トレンド情報をわかりやすくまとめています"
+  author = "管理人"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[outputs]
+  home = ["HTML", "RSS"]
+
+[sitemap]
+  changefreq = "daily"
+  priority = 0.5
