@@ -1,7 +1,7 @@
 """
 自動記事生成スクリプト
 - トレンドキーワードを取得
-- AIで記事を生成
+- Groq API（無料）で記事を生成
 - Hugoの記事ファイルとして保存
 """
 
@@ -20,7 +20,6 @@ def get_trending_keywords():
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=10) as response:
             data = response.read().decode("utf-8")
-            # 簡易XMLパース（title タグを抽出）
             keywords = []
             for line in data.split("<title>"):
                 if "</title>" in line:
@@ -30,7 +29,6 @@ def get_trending_keywords():
             return keywords[:10]
     except Exception as e:
         print(f"トレンド取得エラー: {e}")
-        # フォールバック: 汎用キーワード
         return get_fallback_keywords()
 
 
@@ -47,10 +45,10 @@ def get_fallback_keywords():
 
 
 def generate_article_with_ai(keyword):
-    """Claude APIで記事を生成"""
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    """Groq API（無料）で記事を生成"""
+    api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
-        raise ValueError("ANTHROPIC_API_KEY が設定されていません")
+        raise ValueError("GROQ_API_KEY が設定されていません")
 
     prompt = f"""以下のキーワードについて、SEOに最適化された日本語のブログ記事を書いてください。
 
@@ -74,59 +72,37 @@ description: "メタディスクリプション（120文字以内）"
 """
 
     request_body = json.dumps({
-        "model": "claude-haiku-4-5-20251001",
+        "model": "llama-3.1-8b-instant",
+        "messages": [{"role": "user", "content": prompt}],
         "max_tokens": 4000,
-        "messages": [{"role": "user", "content": prompt}]
+        "temperature": 0.7
     }).encode("utf-8")
 
     req = urllib.request.Request(
-        "https://api.anthropic.com/v1/messages",
+        "https://api.groq.com/openai/v1/chat/completions",
         data=request_body,
         headers={
             "Content-Type": "application/json",
-            "x-api-key": api_key,
-            "anthropic-version": "2023-06-01"
+            "Authorization": f"Bearer {api_key}"
         }
     )
 
     try:
         with urllib.request.urlopen(req, timeout=60) as response:
             result = json.loads(response.read().decode("utf-8"))
-            return result["content"][0]["text"]
+            return result["choices"][0]["message"]["content"]
     except urllib.error.HTTPError as e:
         error_body = e.read().decode("utf-8")
-        print(f"API Error {e.code}: {error_body}")
-        # モデル名が無効な場合、フォールバック
-        if "model" in error_body.lower() or e.code == 400:
-            print("フォールバック: claude-3-haiku-20240307 を試行")
-            request_body = json.dumps({
-                "model": "claude-3-haiku-20240307",
-                "max_tokens": 4000,
-                "messages": [{"role": "user", "content": prompt}]
-            }).encode("utf-8")
-            req = urllib.request.Request(
-                "https://api.anthropic.com/v1/messages",
-                data=request_body,
-                headers={
-                    "Content-Type": "application/json",
-                    "x-api-key": api_key,
-                    "anthropic-version": "2023-06-01"
-                }
-            )
-            with urllib.request.urlopen(req, timeout=60) as response:
-                result = json.loads(response.read().decode("utf-8"))
-                return result["content"][0]["text"]
+        print(f"Groq API Error {e.code}: {error_body}")
         raise
 
 
 def save_article(content, keyword):
     """記事をHugoのコンテンツとして保存"""
     today = datetime.date.today().isoformat()
-    # ファイル名を生成（日付 + キーワードのスラッグ）
     slug = keyword.replace(" ", "-").replace("　", "-").lower()
     filename = f"{today}-{slug}.md"
 
-    # content/posts/ に保存
     posts_dir = Path(__file__).parent.parent / "content" / "posts"
     posts_dir.mkdir(parents=True, exist_ok=True)
 
@@ -138,7 +114,6 @@ def save_article(content, keyword):
         if len(parts) >= 3:
             frontmatter = parts[1]
             body = parts[2]
-            # 日付とカテゴリを追加
             frontmatter += f'\ndate: "{today}"\n'
             frontmatter += f'categories: ["トレンド"]\n'
             frontmatter += f'tags: ["{keyword}"]\n'

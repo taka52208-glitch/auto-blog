@@ -21,7 +21,7 @@ jobs:
 
       - name: 記事を自動生成
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python scripts/generate_article.py
 
       - name: Hugo セットアップ
