@@ -83,7 +83,8 @@ description: "メタディスクリプション（120文字以内）"
         data=request_body,
         headers={
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {api_key}"
+            "Authorization": f"Bearer {api_key}",
+            "User-Agent": "AutoBlog/1.0"
         }
     )
 
