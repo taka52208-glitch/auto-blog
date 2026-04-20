@@ -54,6 +54,12 @@ def generate_article_with_ai(keyword):
 
 キーワード: {keyword}
 
+重要な注意:
+- このキーワードはGoogleトレンドの急上昇ワードです
+- まず、このキーワードが何を指すのか（人名、イベント、商品、ニュースなど）を正しく判断してください
+- 人名の場合は、その人物のプロフィ��ルや最近の話題について書いてください
+- 間違った解釈で記事を書かないでください
+
 要件:
 - タイトルはクリックしたくなるもの（32文字以内）
 - 見出し(h2, h3)を適切に使う
@@ -72,7 +78,7 @@ description: "メタディスクリプション（120文字以内）"
 """
 
     request_body = json.dumps({
-        "model": "llama-3.1-8b-instant",
+        "model": "llama-3.3-70b-versatile",
         "messages": [{"role": "user", "content": prompt}],
         "max_tokens": 4000,
         "temperature": 0.7
