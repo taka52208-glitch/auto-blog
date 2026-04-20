@@ -1,0 +1,47 @@
+name: 毎日自動記事投稿
+
+on:
+  schedule:
+    # 毎日朝9時（日本時間）に実行 = UTC 0:00
+    - cron: '0 0 * * *'
+  workflow_dispatch: # 手動実行も可能
+
+jobs:
+  generate-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Python セットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 記事を自動生成
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/generate_article.py
+
+      - name: Hugo セットアップ
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+
+      - name: サイトをビルド
+        run: hugo --minify
+
+      - name: 変更をコミット＆プッシュ
+        run: |
+          git config user.name "Auto Blog Bot"
+          git config user.email "bot@example.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "auto: 記事追加 $(date +%Y-%m-%d)"
+          git push
+
+      - name: GitHub Pages にデプロイ
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
