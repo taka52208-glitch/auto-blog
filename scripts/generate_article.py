@@ -177,6 +177,17 @@ def save_article(content, keyword):
             frontmatter += f'categories: ["トレンド"]\n'
             frontmatter += f'tags: ["{keyword}"]\n'
             content = f"---{frontmatter}---{body}"
+    else:
+        # frontmatterがない場合は自動付与
+        content = f"""---
+title: "{keyword}について知っておきたいこと"
+description: "{keyword}に関する最新情報をわかりやすく解説"
+date: "{today}"
+categories: ["トレンド"]
+tags: ["{keyword}"]
+---
+
+{content}"""
 
     filepath.write_text(content, encoding="utf-8")
     print(f"記事を保存: {filepath}")
