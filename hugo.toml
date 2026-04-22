@@ -6,6 +6,11 @@ theme = "ananke"
 [params]
   description = "ChatGPT・Claude・Gemini等のAIツールを徹底比較。使い方・料金・活用術をわかりやすく解説。"
   author = "AI Tools Lab"
+  # OGP / SNSシェア用
+  images = ["images/ogp-default.png"]
+  twitter = ""
+  facebook = ""
+  google_analytics = "G-XF8WBQJMLF"
 
 [menu]
   [[menu.main]]
@@ -13,13 +18,17 @@ theme = "ananke"
     url = "/"
     weight = 1
   [[menu.main]]
+    name = "AIツール比較"
+    url = "/categories/aiツール/"
+    weight = 2
+  [[menu.main]]
     name = "About"
     url = "/about/"
-    weight = 2
+    weight = 3
   [[menu.main]]
     name = "プライバシーポリシー"
     url = "/privacy/"
-    weight = 3
+    weight = 4
 
 [markup]
   [markup.goldmark]
@@ -32,3 +41,11 @@ theme = "ananke"
 [sitemap]
   changefreq = "daily"
   priority = 0.5
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+# 1ページあたりの記事数
+[pagination]
+  pagerSize = 20
