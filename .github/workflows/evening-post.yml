@@ -1,9 +1,9 @@
-name: 朝の自動記事投稿
+name: 夕方の自動記事投稿
 
 on:
   schedule:
-    # 朝9時（日本時間）= UTC 0:17（混雑回避で17分にずらす）
-    - cron: '17 0 * * *'
+    # 夕方18時（日本時間）= UTC 9:43（混雑回避で43分にずらす）
+    - cron: '43 9 * * *'
   workflow_dispatch:
 
 permissions:
