@@ -291,6 +291,26 @@ ARTICLE_TEMPLATES = [
     {"keyword": "AI プログラミング学習 独学 おすすめ", "type": "howto"},
     {"keyword": "ChatGPT 英会話 練習 無料 方法", "type": "howto"},
     {"keyword": "AI 資格勉強 活用 おすすめ", "type": "howto"},
+
+    # ===== 収益直結系（Xserver/R4CAREER成約狙い） =====
+    {"keyword": "AIブログ 収益化 月5万 ロードマップ", "type": "howto"},
+    {"keyword": "AI副業ブログ WordPress 始め方 完全ガイド", "type": "howto"},
+    {"keyword": "AIアフィリエイト 稼ぐ サイト 作り方", "type": "howto"},
+    {"keyword": "ChatGPT ブログ 自動化 収益 仕組み", "type": "howto"},
+    {"keyword": "レンタルサーバー 比較 ブログ初心者 おすすめ", "type": "ranking"},
+    {"keyword": "Xserver ConoHa 比較 ブログ どっち", "type": "comparison"},
+    {"keyword": "AI 転職 未経験 成功する 方法", "type": "howto"},
+    {"keyword": "AIエンジニア 転職 年収 ロードマップ", "type": "howto"},
+    {"keyword": "AI人材 求人 未経験OK 探し方", "type": "howto"},
+    {"keyword": "ChatGPT 転職活動 履歴書 職務経歴書 書き方", "type": "howto"},
+    {"keyword": "AI時代 おすすめ 資格 スキル 転職に有利", "type": "ranking"},
+    {"keyword": "プログラミング AI 独学 副業 月10万", "type": "howto"},
+    {"keyword": "AI Webライター 始め方 月3万 稼ぐ", "type": "howto"},
+    {"keyword": "AI 自動収益 ブログ 不労所得 方法", "type": "howto"},
+    {"keyword": "AIツール 組み合わせ 副業 効率化 戦略", "type": "howto"},
+    {"keyword": "AI 在宅ワーク おすすめ 主婦 副業", "type": "ranking"},
+    {"keyword": "AI写真 プロフィール写真 撮影 おすすめ", "type": "ranking"},
+    {"keyword": "マッチングアプリ 写真 撮り方 AI加工 コツ", "type": "howto"},
 ]
 
 
@@ -364,59 +384,107 @@ def search_keyword_info(keyword):
 
 
 KEYWORD_AFFILIATE_MAP = {
+    # 転職・キャリア系 → R4CAREER（高単価）
     "転職": ["R4CAREER"],
     "キャリア": ["R4CAREER"],
     "仕事 奪われる": ["R4CAREER"],
-    "学生": ["合宿免許受付センター"],
-    "大学生": ["合宿免許受付センター"],
-    "勉強": ["合宿免許受付センター"],
-    "副業": ["楽天トラベル"],
-    "在宅": ["楽天トラベル"],
+    "AI時代 転職": ["R4CAREER"],
+    "未経験": ["R4CAREER"],
+    # ブログ・サイト運営系 → Xserver（高単価・成約しやすい）
+    "ブログ": ["Xserver"],
+    "WordPress": ["Xserver"],
+    "サーバー": ["Xserver"],
+    "副業": ["Xserver"],
+    "在宅": ["Xserver"],
+    "稼ぐ": ["Xserver"],
+    "コンテンツ販売": ["Xserver"],
+    # 写真・画像系 → マッチングフォト
     "画像生成": ["マッチングフォト"],
     "写真": ["マッチングフォト"],
     "AI イラスト": ["マッチングフォト"],
-    "ブログ 始め方": ["Xserver"],
-    "WordPress": ["Xserver"],
-    "サーバー": ["Xserver"],
+    "デザイン": ["マッチングフォト"],
 }
 
 
+
+# A8.net等の実際にコミッションが発生するアフィリエイトリンク
+PAID_AFFILIATE_KEYS = ["Xserver", "R4CAREER", "合宿免許受付センター", "マッチングフォト", "楽天トラベル"]
+
+
 def build_affiliate_section(keyword):
-    """キーワードに関連するアフィリエイトリンク情報を生成"""
+    """キーワードに関連するアフィリエイトリンク情報を生成（報酬リンク優先）"""
     links = []
-    # ツール名の直接マッチ
-    for tool_name, info in AFFILIATE_LINKS.items():
-        if tool_name.lower() in keyword.lower():
-            links.append(f"- [{info['text']}]({info['url']}) — {info['note']}")
-    # キーワードベースのマッチ
+    seen_urls = set()
+
+    def add_link(tool_name):
+        info = AFFILIATE_LINKS[tool_name]
+        if info["url"] in seen_urls:
+            return
+        seen_urls.add(info["url"])
+        links.append(f"- [{info['text']}]({info['url']}) — {info['note']}")
+
+    # 1. キーワードベースのマッチ（ASP案件優先）
     for trigger, tool_names in KEYWORD_AFFILIATE_MAP.items():
         if trigger in keyword:
             for name in tool_names:
                 if name in AFFILIATE_LINKS:
-                    info = AFFILIATE_LINKS[name]
-                    link = f"- [{info['text']}]({info['url']}) — {info['note']}"
-                    if link not in links:
-                        links.append(link)
-    # キーワードに直接含まれなくても関連ツールを2つ追加
+                    add_link(name)
+
+    # 2. ツール名の直接マッチ
+    for tool_name in AFFILIATE_LINKS:
+        if tool_name.lower() in keyword.lower():
+            add_link(tool_name)
+
+    # 3. フォールバック: ASP案件（報酬が出るリンク）を優先的に追加
     if len(links) < 2:
-        related = random.sample(list(AFFILIATE_LINKS.items()), min(3, len(AFFILIATE_LINKS)))
-        for tool_name, info in related:
-            link_text = f"- [{info['text']}]({info['url']}) — {info['note']}"
-            if link_text not in links:
-                links.append(link_text)
+        paid_candidates = [k for k in PAID_AFFILIATE_KEYS if k not in seen_urls]
+        random.shuffle(paid_candidates)
+        for key in paid_candidates:
+            if key in AFFILIATE_LINKS:
+                add_link(key)
             if len(links) >= 3:
                 break
+
+    # 4. それでも足りなければ関連ツールを追加
+    if len(links) < 2:
+        candidates = [k for k in AFFILIATE_LINKS if AFFILIATE_LINKS[k]["url"] not in seen_urls]
+        for tool_name in random.sample(candidates, min(3, len(candidates))):
+            add_link(tool_name)
+            if len(links) >= 3:
+                break
+
     return "\n".join(links)
 
 
 def build_internal_links(current_keyword):
-    """既存記事への内部リンクを生成"""
+    """既存記事への内部リンクを生成（キーワード関連度順）"""
     articles = get_published_articles()
     if not articles:
         return ""
 
-    # 最大3記事をランダムに選んで内部リンク
-    selected = random.sample(articles, min(3, len(articles)))
+    current_words = set(current_keyword.lower().split())
+
+    # 各記事との関連度スコアを計算
+    scored = []
+    for a in articles:
+        title_words = set(a["title"].lower().replace("【", " ").replace("】", " ").replace("｜", " ").split())
+        slug_words = set(a["slug"].replace("-", " ").lower().split())
+        all_words = title_words | slug_words
+        overlap = len(current_words & all_words)
+        scored.append((overlap, a))
+
+    # 関連度順にソート（同スコアならランダム）
+    random.shuffle(scored)
+    scored.sort(key=lambda x: x[0], reverse=True)
+
+    # 上位3記事（ただし完全一致の自分自身は除く）
+    selected = []
+    for score, a in scored:
+        if len(selected) >= 3:
+            break
+        if a["slug"] not in current_keyword.replace(" ", "-").lower():
+            selected.append(a)
+
     links = []
     for a in selected:
         links.append(f"- [{a['title']}](/posts/{a['slug']}/)")
@@ -469,7 +537,13 @@ def get_prompt_by_type(keyword, article_type, keyword_info):
 - 各ツールの料金プランを正確に記載する
 - 公式サイトへのリンクを[ツール名](公式URL)形式で入れる
 - 「無料プランあり」「◯日間無料トライアル」などの情報を強調
-- 記事の最後に「今すぐ試してみる」セクションを入れ、リンク付きで紹介
+- アフィリエイトリンクは記事内に最低3箇所に分散配置する：
+  1. 冒頭の結論部分（「結論から言うと〇〇がおすすめ → [リンク]」）
+  2. 本文の該当ツール解説セクション内
+  3. 記事末尾の「今すぐ始める3ステップ」セクション
+- 各リンクの前後には読者の行動を促す一文を入れる（例：「無料で始められるので、まずは試してみてください」）
+- 「期間限定」「今なら」などの緊急性ワードを自然に使う
+- 料金比較表には必ず「無料お試し」列を入れる
 
 {internal_links_instruction}
 
@@ -484,10 +558,18 @@ def get_prompt_by_type(keyword, article_type, keyword_info):
 ## 出力形式
 ---
 title: "タイトル（32文字以内・数字か疑問形＋年号入り）"
-description: "メタディスクリプション（80〜120文字・キーワード含む）"
+description: "メタディスクリプション（80〜120文字・キーワード含む・行動喚起入り）"
 ---
 
 本文（4000〜5000文字）
+
+※本文の最後には必ず以下のセクションを入れること：
+### 今すぐ始める3ステップ
+1. [具体的なステップ1]
+2. [具体的なステップ2]
+3. [具体的なステップ3]
+
+上記ステップ内にアフィリエイトリンクを自然に組み込むこと。
 """
 
     if article_type == "comparison":
@@ -629,8 +711,33 @@ slug: "{slug}"
     return filepath
 
 
+MIN_ARTICLE_LENGTH = 2500  # 最低文字数（これ以下は再生成）
+MAX_RETRIES = 2  # 再生成の最大回数
+
+
+def validate_article(article):
+    """記事の品質チェック"""
+    # frontmatterを除いた本文の長さをチェック
+    body = article
+    if "---" in article:
+        parts = article.split("---", 2)
+        if len(parts) >= 3:
+            body = parts[2]
+
+    body_length = len(body.strip())
+    if body_length < MIN_ARTICLE_LENGTH:
+        return False, f"本文が短すぎます（{body_length}文字 < {MIN_ARTICLE_LENGTH}文字）"
+
+    # h2見出しが最低3つあるか
+    h2_count = body.count("\n## ")
+    if h2_count < 3:
+        return False, f"h2見出しが少なすぎます（{h2_count}個 < 3個）"
+
+    return True, "OK"
+
+
 def main():
-    print("=== AI Tools Lab 記事生成 v2 ===")
+    print("=== AI Tools Lab 記事生成 v3 ===")
     print(f"日時: {datetime.datetime.now()}")
 
     # 1. キーワード選定
@@ -644,9 +751,22 @@ def main():
     print("関連情報を検索中...")
     keyword_info = search_keyword_info(keyword)
 
-    # 3. 記事生成
-    print("記事生成中...")
-    article = generate_article_with_ai(keyword, article_type, keyword_info)
+    # 3. 記事生成（品質チェック付きリトライ）
+    article = None
+    for attempt in range(MAX_RETRIES + 1):
+        print(f"記事生成中...（試行 {attempt + 1}/{MAX_RETRIES + 1}）")
+        article = generate_article_with_ai(keyword, article_type, keyword_info)
+
+        is_valid, reason = validate_article(article)
+        if is_valid:
+            print(f"品質チェック: OK")
+            break
+        else:
+            print(f"品質チェック: NG — {reason}")
+            if attempt < MAX_RETRIES:
+                print("再生成します...")
+            else:
+                print("最大試行回数に達しました。最後の生成結果を使用します。")
 
     # 4. 保存
     save_article(article, keyword)
