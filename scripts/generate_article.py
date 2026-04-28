@@ -10,6 +10,7 @@ import os
 import json
 import datetime
 import random
+import time
 import urllib.request
 import urllib.parse
 from pathlib import Path
@@ -656,14 +657,31 @@ def generate_article_with_ai(keyword, article_type, keyword_info):
         }
     )
 
-    try:
-        with urllib.request.urlopen(req, timeout=60) as response:
-            result = json.loads(response.read().decode("utf-8"))
-            return result["choices"][0]["message"]["content"]
-    except urllib.error.HTTPError as e:
-        error_body = e.read().decode("utf-8")
-        print(f"Groq API Error {e.code}: {error_body}")
-        raise
+    max_retries = 5
+    for attempt in range(max_retries):
+        try:
+            with urllib.request.urlopen(req, timeout=120) as response:
+                result = json.loads(response.read().decode("utf-8"))
+                return result["choices"][0]["message"]["content"]
+        except urllib.error.HTTPError as e:
+            error_body = e.read().decode("utf-8")
+            print(f"Groq API Error {e.code}: {error_body}")
+            if e.code == 429 and attempt < max_retries - 1:
+                wait = 60 * (attempt + 1)
+                print(f"レート制限。{wait}秒待機後リトライ ({attempt + 1}/{max_retries})...")
+                time.sleep(wait)
+                # リクエストオブジェクトを再作成（再利用不可のため）
+                req = urllib.request.Request(
+                    "https://api.groq.com/openai/v1/chat/completions",
+                    data=request_body,
+                    headers={
+                        "Content-Type": "application/json",
+                        "Authorization": f"Bearer {api_key}",
+                        "User-Agent": "AutoBlog/1.0"
+                    }
+                )
+                continue
+            raise
 
 
 def save_article(content, keyword):

@@ -31,6 +31,7 @@ jobs:
           python-version: '3.11'
 
       - name: 記事を自動生成
+        timeout-minutes: 10
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python scripts/generate_article.py
