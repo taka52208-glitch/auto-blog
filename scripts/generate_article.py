@@ -391,19 +391,25 @@ KEYWORD_AFFILIATE_MAP = {
     "仕事 奪われる": ["R4CAREER"],
     "AI時代 転職": ["R4CAREER"],
     "未経験": ["R4CAREER"],
+    "求人": ["R4CAREER"],
+    "年収": ["R4CAREER"],
     # ブログ・サイト運営系 → Xserver（高単価・成約しやすい）
     "ブログ": ["Xserver"],
     "WordPress": ["Xserver"],
     "サーバー": ["Xserver"],
-    "副業": ["Xserver"],
-    "在宅": ["Xserver"],
-    "稼ぐ": ["Xserver"],
-    "コンテンツ販売": ["Xserver"],
+    "サイト 作り方": ["Xserver"],
+    "収益化": ["Xserver"],
     # 写真・画像系 → マッチングフォト
-    "画像生成": ["マッチングフォト"],
     "写真": ["マッチングフォト"],
-    "AI イラスト": ["マッチングフォト"],
-    "デザイン": ["マッチングフォト"],
+    "プロフィール": ["マッチングフォト"],
+    "マッチングアプリ": ["マッチングフォト"],
+    # 旅行系 → 楽天トラベル
+    "旅行": ["楽天トラベル"],
+    "ホテル": ["楽天トラベル"],
+    "出張": ["楽天トラベル"],
+    # 免許系 → 合宿免許
+    "免許": ["合宿免許受付センター"],
+    "運転": ["合宿免許受付センター"],
 }
 
 
@@ -436,20 +442,14 @@ def build_affiliate_section(keyword):
         if tool_name.lower() in keyword.lower():
             add_link(tool_name)
 
-    # 3. フォールバック: ASP案件（報酬が出るリンク）を優先的に追加
+    # 3. キーワードに含まれるツール名に関連するリンクのみ追加（無関係なリンクは入れない）
     if len(links) < 2:
-        paid_candidates = [k for k in PAID_AFFILIATE_KEYS if k not in seen_urls]
-        random.shuffle(paid_candidates)
-        for key in paid_candidates:
-            if key in AFFILIATE_LINKS:
-                add_link(key)
-            if len(links) >= 3:
-                break
-
-    # 4. それでも足りなければ関連ツールを追加
-    if len(links) < 2:
-        candidates = [k for k in AFFILIATE_LINKS if AFFILIATE_LINKS[k]["url"] not in seen_urls]
-        for tool_name in random.sample(candidates, min(3, len(candidates))):
+        kw_lower = keyword.lower()
+        candidates = [k for k in AFFILIATE_LINKS
+                      if AFFILIATE_LINKS[k]["url"] not in seen_urls
+                      and k not in PAID_AFFILIATE_KEYS
+                      and k.lower() in kw_lower]
+        for tool_name in candidates:
             add_link(tool_name)
             if len(links) >= 3:
                 break
@@ -508,12 +508,12 @@ def get_prompt_by_type(keyword, article_type, keyword_info):
 
     base_rules = f"""
 ## 文体ルール
-- 冒頭は読者の疑問を代弁する一文から始める（例：「〜と思ったことはありませんか？」）
+- 冒頭は毎回異なるパターンで書く（疑問形/体験談風/データ提示/問題提起など。「〜と思ったことはありませんか？」は使わない）
 - 冒頭直後に結論を書く（読者を待たせない）
-- 話しかけるような親しみやすい口調
+- 話しかけるような親しみやすい口調だが、押し売り感は出さない
 - 短い文でテンポよく（1文40文字以内を目安）
 - 具体的な数字や例を入れる（料金は必ず正確に記載）
-- 読者が「へぇ」と思う意外な事実を各セクションに1つ入れる（「意外な事実：」で始める）
+- 各セクションに1つ、読者が知らなさそうな具体的な豆知識を入れる（公式データや調査結果ベース。「意外な事実：」は使わず自然に文中に織り込む）
 - 同じフレーズを繰り返さない（「ぶっちゃけ」「実は」は各1回まで）
 - 各セクションに具体的な使用シーンや体験談風のエピソードを入れる
 - 文末のバリエーションを持たせる（「です」「ます」「でしょう」「ください」「おすすめ」を交互に）
@@ -538,12 +538,9 @@ def get_prompt_by_type(keyword, article_type, keyword_info):
 - 各ツールの料金プランを正確に記載する
 - 公式サイトへのリンクを[ツール名](公式URL)形式で入れる
 - 「無料プランあり」「◯日間無料トライアル」などの情報を強調
-- アフィリエイトリンクは記事内に最低3箇所に分散配置する：
-  1. 冒頭の結論部分（「結論から言うと〇〇がおすすめ → [リンク]」）
-  2. 本文の該当ツール解説セクション内
-  3. 記事末尾の「今すぐ始める3ステップ」セクション
-- 各リンクの前後には読者の行動を促す一文を入れる（例：「無料で始められるので、まずは試してみてください」）
-- 「期間限定」「今なら」などの緊急性ワードを自然に使う
+- 上記の収益化リンクは【記事の内容に関連する場合のみ】使うこと
+- 関連しないリンクは絶対に入れない（例：AI学習の記事に旅行サイトを入れない）
+- リンクは記事の流れに自然に溶け込むように配置する
 - 料金比較表には必ず「無料お試し」列を入れる
 
 {internal_links_instruction}
