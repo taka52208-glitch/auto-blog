@@ -791,9 +791,16 @@ def main():
             if attempt < MAX_RETRIES:
                 print("再生成します...")
             else:
-                print("最大試行回数に達しました。最後の生成結果を使用します。")
+                print("最大試行回数に達しました。最終品質チェックへ進みます。")
 
-    # 4. 保存
+    # 4. 品質チェック最終判定
+    is_valid, reason = validate_article(article)
+    if not is_valid:
+        print(f"最終品質チェック: NG — {reason}")
+        print("品質基準を満たさないため、記事を投稿しません。")
+        return
+
+    # 5. 保存
     save_article(article, keyword)
 
     print("=== 完了 ===")

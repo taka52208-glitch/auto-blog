@@ -16,7 +16,7 @@ import secrets
 from pathlib import Path
 
 
-SITE_URL = "https://taka52208-glitch.github.io/auto-blog"
+SITE_URL = "https://ai-navi-tools.net"
 
 
 def get_latest_article():
