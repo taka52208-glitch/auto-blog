@@ -280,6 +280,7 @@ ARTICLE_TEMPLATES = [
     {"keyword": "Google Gemini 最新 使い方", "type": "news"},
     {"keyword": "AI 最新ニュース まとめ", "type": "news"},
     {"keyword": "GPT-5 いつ 性能 予想", "type": "news"},
+    {"keyword": "GPT-5.5 いつ リリース 最新情報", "type": "news"},
     {"keyword": "AI 規制 法律 日本 最新", "type": "news"},
     {"keyword": "OpenAI 最新 ニュース まとめ", "type": "news"},
     {"keyword": "Anthropic Claude 最新 アップデート", "type": "news"},
