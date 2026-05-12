@@ -29,7 +29,7 @@ from generate_article import (
 )
 
 POSTS_DIR = Path(__file__).parent.parent / "content" / "posts"
-SLEEP_BETWEEN = 25  # 秒。Groq llama-3.3-70b 30 RPM対策（安全マージン込み）
+SLEEP_BETWEEN = 70  # 秒。Groq無料tier TPM=12000対策（1記事約8000トークン消費するため1分以上空ける）
 
 
 def backup_and_clear_posts():
@@ -201,7 +201,7 @@ def generate_one(template, target_date):
         else:
             print(f"  ✗ 品質NG: {reason}")
             if attempt < MAX_RETRIES:
-                time.sleep(15)
+                time.sleep(45)  # TPM枠回復待機
 
     print("  最大試行到達、スキップ")
     return None
