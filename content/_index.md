@@ -6,4 +6,7 @@ aliases:
   - /posts/2026-04-20-斎藤工/
   - /posts/2026-04-20-名古屋ダイヤモンドドルフィンズ/
   - /posts/2026-04-20-秋田汐梨/
+  - /posts/claude-使い方-コツ-プロンプト/
+  - /posts/aiプレゼン作成ツール-比較/
+  - /posts/gemini-chatgpt-違い-2026/
 ---
