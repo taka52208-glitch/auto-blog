@@ -1,0 +1,63 @@
+name: 記事一括再生成（手動）
+
+on:
+  workflow_dispatch:
+    inputs:
+      count:
+        description: '生成する記事数'
+        required: true
+        default: '40'
+        type: string
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "blog-deploy"
+  cancel-in-progress: false
+
+jobs:
+  batch-regenerate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Python セットアップ
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 記事を一括再生成
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        run: python scripts/batch_regenerate.py ${{ inputs.count }}
+
+      - name: Hugo セットアップ
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: サイトをビルド
+        run: hugo --minify
+
+      - name: 変更をコミット＆プッシュ
+        run: |
+          git config user.name "Auto Blog Bot"
+          git config user.email "bot@example.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "regen: 記事一括再生成（${{ inputs.count }}本）品質改善プロンプトv4"
+          git push
+
+      - name: GitHub Pages にデプロイ
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
