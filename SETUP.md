@@ -22,15 +22,15 @@ git remote add origin https://github.com/あなたのユーザー名/auto-blog.g
 git push -u origin main
 ```
 
-### ステップ4: Anthropic APIキーを取得
-1. https://console.anthropic.com にアクセス
+### ステップ4: Groq APIキーを取得
+1. https://console.groq.com にアクセス
 2. アカウント作成
-3. APIキーを発行（最初$5分の無料クレジットあり）
+3. APIキーを発行（無料枠あり）
 
 ### ステップ5: GitHubにAPIキーを設定
 1. リポジトリの Settings → Secrets and variables → Actions
 2. 「New repository secret」をクリック
-3. Name: `ANTHROPIC_API_KEY`
+3. Name: `GROQ_API_KEY`
 4. Value: 取得したAPIキー
 5. 「Add secret」をクリック
 
@@ -55,18 +55,36 @@ git push
 
 ## セットアップ後
 
-- **毎日朝9時**に自動で1記事が投稿されます
+- **毎日朝9時と夕方18時**に自動で計2記事が投稿されます
 - 何もしなくてOK
-- 1ヶ月で約30記事が貯まります
+- 1ヶ月で約60記事が貯まります
 
-## 収益化（記事が30本以上貯まったら）
+## 収益化ロードマップ
 
-1. Google AdSense に申請
-   - https://www.google.com/adsense
-   - サイトURLを登録
-   - 審査通過後、広告が自動表示される
+### Phase 1: 記事蓄積（1〜2ヶ月目）
+- 自動投稿で60〜120記事を貯める
+- この期間の収益: ほぼ0円
 
-2. 審査通過したら `layouts/index.html` のAdSenseコメントを外す
+### Phase 2: AdSense申請（記事30本以上で申請可能）
+1. Google AdSense に申請: https://www.google.com/adsense
+2. 審査通過後、以下3ファイルのAdSenseコメントを外す:
+   - `layouts/partials/head-additions.html`（ヘッダー広告コード）
+   - `layouts/index.html`（トップページ広告）
+   - `layouts/_default/single.html`（記事ページ広告）
+3. `ca-pub-あなたのID` と `あなたのスロットID` を実際の値に置換
+
+### Phase 3: アフィリエイト登録（並行して進める）
+1. **A8.net** に登録: https://www.a8.net
+2. **もしもアフィリエイト** に登録: https://af.moshimo.com
+3. AIツール関連の広告主と提携
+4. `scripts/generate_article.py` の `AFFILIATE_LINKS` のURLを実際のアフィリエイトリンクに差し替え
+
+### Phase 4: 月1万円達成の目安
+| 収益源 | 目標 | 月額 |
+|--------|------|------|
+| AdSense（月1万PV想定） | RPM 300円 | 約3,000円 |
+| アフィリエイト成約 | 月5〜10件 | 約5,000〜10,000円 |
+| **合計** | | **約8,000〜13,000円** |
 
 ## 費用
 
@@ -74,11 +92,20 @@ git push
 |------|------|
 | GitHub Pages | 無料 |
 | GitHub Actions | 無料（月2000分まで） |
-| Anthropic API（Haiku） | 約¥500〜¥1,500 |
-| **合計** | **約¥500〜¥1,500/月** |
+| Groq API（Llama 3.3） | 無料枠あり（超過分は従量課金） |
+| **合計** | **ほぼ無料（無料枠内の場合）** |
+
+## SEO機能（自動）
+
+- 構造化データ（JSON-LD）で検索結果のリッチスニペット対応
+- OGPタグでSNSシェア時の表示最適化
+- 関連記事の自動表示で回遊率アップ
+- 記事間の内部リンク自動挿入でSEO評価向上
+- カテゴリ・タグによる記事整理
 
 ## 注意事項
 
-- 最初の3〜6ヶ月は収益ほぼゼロです（SEOに時間がかかるため）
+- 最初の2〜3ヶ月は収益ほぼゼロです（SEOに時間がかかるため）
 - 記事の品質を上げたい場合は、スクリプトのプロンプトを調整してください
 - AdSense審査にはある程度の記事数と品質が必要です（目安: 30記事以上）
+- アフィリエイトリンクは必ず実際のASPリンクに差し替えてください

@@ -1,19 +1,58 @@
 {{ define "main" }}
-<div class="container">
-  <h1>{{ .Site.Title }}</h1>
-  <p>{{ .Site.Params.description }}</p>
+<div class="pa3 pa4-ns">
+  <div class="center measure-wide">
+    <h1 class="f2">{{ .Site.Title }}</h1>
+    <p class="f4 lh-copy mid-gray">{{ .Site.Params.description }}</p>
 
-  <!-- Google AdSense 広告枠（審査通過後に有効化） -->
-  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-あなたのID" crossorigin="anonymous"></script> -->
+    <!-- トップAdSense広告枠（審査通過後にコメントを外す） -->
+    <!-- <div style="margin: 1.5rem 0; text-align: center;">
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-あなたのID"
+        data-ad-slot="あなたのスロットID"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div> -->
 
-  {{ range .Paginator.Pages }}
-  <article class="post-entry">
-    <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-    <time>{{ .Date.Format "2006-01-02" }}</time>
-    <p>{{ .Summary }}</p>
-  </article>
-  {{ end }}
+    <!-- カテゴリナビ -->
+    <div style="margin: 1.5rem 0; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+      {{ range .Site.Taxonomies.categories }}
+        <a href="{{ .Page.Permalink }}" style="background: #f0f0f0; padding: 0.3rem 0.8rem; border-radius: 4px; text-decoration: none; color: #333; font-size: 0.9rem;">
+          {{ .Page.Title }} ({{ .Count }})
+        </a>
+      {{ end }}
+    </div>
 
-  {{ template "_internal/pagination.html" . }}
+    {{ range .Paginator.Pages }}
+    <article style="margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid #eee;">
+      <h2 class="f3" style="margin-bottom: 0.3rem;">
+        <a href="{{ .Permalink }}" style="text-decoration: none; color: #333;">{{ .Title }}</a>
+      </h2>
+      <div style="font-size: 0.85rem; color: #888; margin-bottom: 0.5rem;">
+        <time>{{ .Date.Format "2006年01月02日" }}</time>
+        {{ range .Params.tags }}
+          <span style="background: #e8f4fd; padding: 0.1rem 0.4rem; border-radius: 3px; margin-left: 0.3rem;">{{ . }}</span>
+        {{ end }}
+      </div>
+      <p class="mid-gray" style="margin: 0;">{{ .Summary | truncate 120 }}</p>
+    </article>
+
+    <!-- 5記事ごとにAdSense広告枠（審査通過後にコメントを外す） -->
+    <!-- {{ if modBool (add $.Paginator.PageNumber 1) 5 }}
+    <div style="margin: 1.5rem 0; text-align: center;">
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-あなたのID"
+        data-ad-slot="あなたのスロットID"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+    {{ end }} -->
+    {{ end }}
+
+    {{ template "_internal/pagination.html" . }}
+  </div>
 </div>
 {{ end }}

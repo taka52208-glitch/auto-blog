@@ -42,6 +42,9 @@ jobs:
           hugo-version: 'latest'
           extended: true
 
+      - name: 旧ビルド成果物をクリーン（stale URL混入防止）
+        run: rm -rf public/*
+
       - name: サイトをビルド
         run: hugo --minify
 
