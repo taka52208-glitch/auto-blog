@@ -1,0 +1,52 @@
+name: サイトをビルド＆デプロイ（記事生成なし）
+
+# content や layouts を手動修正したとき、新しい記事を生成せずに
+# 既存の内容だけをそのままビルドして公開するためのワークフロー。
+# main への push で自動的に走る。
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/**'
+      - 'layouts/**'
+      - 'static/**'
+      - 'hugo.toml'
+      - 'themes/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "blog-deploy"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Hugo セットアップ
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: 旧ビルド成果物をクリーン（stale URL混入防止）
+        run: rm -rf public/*
+
+      - name: サイトをビルド
+        run: hugo --minify
+
+      - name: GitHub Pages にデプロイ
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public

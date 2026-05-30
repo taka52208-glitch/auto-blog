@@ -1,0 +1,33 @@
+{{ define "main" }}
+<article class="pa3 pa4-ns nested-copy-line-height">
+  <section class="cf ph3 ph5-l pv3 pv4-l f4 center measure-wide lh-copy mid-gray">
+
+    {{ .Content }}
+
+    <!-- 記事下AdSense広告枠（審査通過後にコメントを外す） -->
+    <!-- <div class="ad-article-bottom" style="margin: 2rem 0; text-align: center;">
+      <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-あなたのID"
+        data-ad-slot="あなたのスロットID"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div> -->
+
+    <!-- 関連記事 -->
+    {{ $related := .Site.RegularPages.Related . | first 5 }}
+    {{ with $related }}
+    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #ddd;">
+      <h2>関連記事</h2>
+      <ul>
+        {{ range . }}
+        <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
+
+  </section>
+</article>
+{{ end }}

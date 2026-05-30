@@ -345,12 +345,19 @@ def get_published_articles():
             try:
                 text = f.read_text(encoding="utf-8")
                 title = ""
+                slug = ""
                 for line in text.split("\n"):
-                    if line.strip().startswith("title:"):
+                    s = line.strip()
+                    if s.startswith("title:") and not title:
                         title = line.split(":", 1)[1].strip().strip('"').strip("'")
-                        break
+                    elif s.startswith("slug:") and not slug:
+                        slug = line.split(":", 1)[1].strip().strip('"').strip("'")
+                # frontmatterにslugが無ければ、ファイル名から日付を除いた部分を使う
+                # （HugoのURLは frontmatter の slug を優先するため、ファイル名stemだと404になる）
+                if not slug:
+                    import re as _re
+                    slug = _re.sub(r"^\d{4}-\d{2}-\d{2}-", "", f.stem)
                 if title:
-                    slug = f.stem
                     articles.append({"title": title, "slug": slug})
             except Exception:
                 pass
@@ -737,7 +744,7 @@ slug: "{slug}"
     return filepath
 
 
-MIN_ARTICLE_LENGTH = 2000  # 最低文字数（これ以下は再生成）。Groq llama-3.3-70b の現実的な達成範囲に合わせる
+MIN_ARTICLE_LENGTH = 2500  # 最低文字数（これ以下は再生成）。AdSense「有用性の低いコンテンツ」対策で薄い記事を弾く
 MAX_RETRIES = 2  # 再生成の最大回数
 
 
