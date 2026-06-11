@@ -9,4 +9,11 @@ aliases:
   - /posts/claude-使い方-コツ-プロンプト/
   - /posts/aiプレゼン作成ツール-比較/
   - /posts/gemini-chatgpt-違い-2026/
+  - /posts/gpt-5-いつ-性能-予想/
+  - /posts/ai-英語学習-おすすめ-方法/
+  - /posts/ai-転職-キャリアチェンジ-未経験-おすすめ/
+  - /posts/ai-ナレーション-副業-始め方/
+  - /posts/chatgpt-使えない-制限-代替/
+  - /posts/ai-業務効率化-ツール-事例/
+  - /posts/ai-写真加工-副業-稼ぐ/
 ---
