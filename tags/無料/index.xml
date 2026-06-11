@@ -74,7 +74,7 @@
 &lt;p&gt;AIを「下書きと壁打ちの相棒」と位置づけ、仕上げは人間が責任を持つ。この使い方が、品質と効率を両立させる近道です。&lt;/p&gt;
 &lt;h2 id="仕事や副業にaiを活かすなら"&gt;仕事や副業にAIを活かすなら&lt;/h2&gt;
 &lt;p&gt;文章作成をさらに効率化したい人は、プロンプト（指示文）の出し方を覚えると一気に成果が変わります。具体的なコツは&lt;a href="https://ai-navi-tools.net/posts/chatgpt-%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88-%E4%BB%95%E4%BA%8B-%E5%8A%B9%E7%8E%87%E5%8C%96/"&gt;ChatGPTのプロンプトで仕事を効率化する方法&lt;/a&gt;でまとめています。&lt;/p&gt;
-&lt;p&gt;AIで書く力をお金に変えたい人は、&lt;a href="https://ai-navi-tools.net/posts/chatgpt-%E3%83%96%E3%83%AD%E3%82%B0-%E7%A8%BC%E3%81%90-%E6%96%B9%E6%B3%95-%E6%9C%885%E4%B8%87/"&gt;ChatGPTでブログ記事を書いて稼ぐ方法&lt;/a&gt;や、文章スキルを副業にする&lt;a href="https://ai-navi-tools.net/posts/ai-%E3%83%A9%E3%82%A4%E3%82%BF%E3%83%BC-%E5%89%AF%E6%A5%AD-%E5%A7%8B%E3%82%81%E6%96%B9-%E5%8D%98%E4%BE%A1/"&gt;AIライターの始め方と単価&lt;/a&gt;もあわせてどうぞ。&lt;/p&gt;
+&lt;p&gt;AIで書く力をお金に変えたい人は、&lt;a href="https://ai-navi-tools.net/posts/ai%E3%83%96%E3%83%AD%E3%82%B0-%E5%8F%8E%E7%9B%8A%E5%8C%96-%E6%9C%885%E4%B8%87-%E3%83%AD%E3%83%BC%E3%83%89%E3%83%9E%E3%83%83%E3%83%97/"&gt;AIブログ収益化のロードマップ（月5万を目指す手順）&lt;/a&gt;や、文章スキルを副業にする&lt;a href="https://ai-navi-tools.net/posts/ai-%E3%83%A9%E3%82%A4%E3%82%BF%E3%83%BC-%E5%89%AF%E6%A5%AD-%E5%A7%8B%E3%82%81%E6%96%B9-%E5%8D%98%E4%BE%A1/"&gt;AIライターの始め方と単価&lt;/a&gt;もあわせてどうぞ。&lt;/p&gt;
 &lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
 &lt;p&gt;無料のAI文章作成ツールは「全部同じ」ではありません。迷ったらChatGPTから始め、調べながら書くならGemini、長文と自然な日本語ならClaude、Office中心ならCopilot、メモの中で書くならNotion AI、既存の文章を直すならDeepL Write、と用途で選ぶのが失敗しないコツです。&lt;/p&gt;</description></item><item><title>無料AIデザインツールの比較と選び方【2026年版】</title><link>https://ai-navi-tools.net/posts/ai%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%83%84%E3%83%BC%E3%83%AB-%E7%84%A1%E6%96%99-%E3%81%8A%E3%81%99%E3%81%99%E3%82%81/</link><pubDate>Wed, 06 May 2026 00:00:00 +0000</pubDate><guid>https://ai-navi-tools.net/posts/ai%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%83%84%E3%83%BC%E3%83%AB-%E7%84%A1%E6%96%99-%E3%81%8A%E3%81%99%E3%81%99%E3%82%81/</guid><description>&lt;p&gt;「無料でどこまでデザインできるのか」「結局どれを選べばいいのか」で迷っている人へ、先に結論を書きます。SNS用の画像やバナーをサクッと作りたいなら &lt;strong&gt;Canva&lt;/strong&gt;、写真補正やチラシも含めて手堅く使いたいなら &lt;strong&gt;Adobe Express&lt;/strong&gt;、ロゴやUI・チームでの共同編集なら &lt;strong&gt;Figma&lt;/strong&gt;、Officeとの相性やWindows環境重視なら &lt;strong&gt;Microsoft Designer&lt;/strong&gt;、本格的なイラスト・ベクター生成なら &lt;strong&gt;Recraft&lt;/strong&gt; が候補になります。ツールごとに「得意な用途」「無料でできる範囲」「生成画像を商用で使えるか」が違うので、自分の目的に合わせて選ぶのが失敗しないコツです。&lt;/p&gt;
 &lt;p&gt;以下では、それぞれのツールが何に向いていて、無料プランでどこまで触れるのか、注意すべき権利まわりを具体的に整理します。&lt;/p&gt;
@@ -186,7 +186,6 @@
 &lt;li&gt;&lt;strong&gt;参照画像やスタイル指定を活用する&lt;/strong&gt;：方向性を固定してから生成すると、当たりを引く確率が上がります。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;一発で完璧を狙わず「下地」を作って加工で仕上げる&lt;/strong&gt;：生成で8割の素材を作り、細部はPhotoshopなどの加工で詰めると生成回数を減らせます。似た指示の生成を連発せず、1回で出た複数案を見比べて、本当に方向転換が必要なときだけ作り直しましょう。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;「生成で素材を作り、加工で価値を足す」流れは、副業として画像づくりに取り組むときの基本でもあります。実際に稼ぐ動かし方は&lt;a href="https://ai-navi-tools.net/posts/ai-%E5%86%99%E7%9C%9F%E5%8A%A0%E5%B7%A5-%E5%89%AF%E6%A5%AD-%E7%A8%BC%E3%81%90/"&gt;AI写真加工で副業を稼ぐ方法&lt;/a&gt;で具体的に紹介しています。&lt;/p&gt;
 &lt;h2 id="fireflyが向いている人"&gt;Fireflyが向いている人&lt;/h2&gt;
 &lt;p&gt;向いているのは、生成画像を&lt;strong&gt;仕事や販売に使いたい&lt;/strong&gt;人、すでにCreative Cloudを使っていて&lt;strong&gt;ワークフローに生成AIを足したい&lt;/strong&gt;人、まずは無料の範囲で試してから課金を考えたい慎重派です。逆に、極端に個性的な画風だけを追求したい人や、ローカルで細かくモデルを制御したい上級者は、他ツールのほうが合うこともあります。&lt;/p&gt;
 &lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;

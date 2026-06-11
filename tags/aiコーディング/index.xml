@@ -1,9 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AIコーディング on AI Tools Lab - AIツール比較＆活用ガイド</title><link>https://ai-navi-tools.net/tags/ai%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0/</link><description>Recent content in AIコーディング on AI Tools Lab - AIツール比較＆活用ガイド</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Fri, 01 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://ai-navi-tools.net/tags/ai%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>2026年版 AIコーディングツール徹底比較｜目的別の選び方</title><link>https://ai-navi-tools.net/posts/ai%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0-%E3%83%84%E3%83%BC%E3%83%AB-%E3%81%8A%E3%81%99%E3%81%99%E3%82%81-2026/</link><pubDate>Fri, 01 May 2026 00:00:00 +0000</pubDate><guid>https://ai-navi-tools.net/posts/ai%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0-%E3%83%84%E3%83%BC%E3%83%AB-%E3%81%8A%E3%81%99%E3%81%99%E3%82%81-2026/</guid><description>&lt;h2 id="結論万能の1位はない使い方で選ぶ"&gt;結論：万能の1位はない。使い方で選ぶ&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AIコーディング on AI Tools Lab - AIツール比較＆活用ガイド</title><link>https://ai-navi-tools.net/tags/ai%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0/</link><description>Recent content in AIコーディング on AI Tools Lab - AIツール比較＆活用ガイド</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Fri, 12 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://ai-navi-tools.net/tags/ai%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>2026年版 AIコーディングツール徹底比較｜実際に毎日使って選んだ目的別の使い分け</title><link>https://ai-navi-tools.net/posts/ai%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0-%E3%83%84%E3%83%BC%E3%83%AB-%E3%81%8A%E3%81%99%E3%81%99%E3%82%81-2026/</link><pubDate>Fri, 01 May 2026 00:00:00 +0000</pubDate><guid>https://ai-navi-tools.net/posts/ai%E3%82%B3%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0-%E3%83%84%E3%83%BC%E3%83%AB-%E3%81%8A%E3%81%99%E3%81%99%E3%82%81-2026/</guid><description>&lt;h2 id="はじめにこの記事は実際に毎日使っている側から書いています"&gt;はじめに：この記事は「実際に毎日使っている側」から書いています&lt;/h2&gt;
+&lt;p&gt;筆者は、AIコーディングツールを使って実際にランディングページや業務自動化ツールを作り、公開・納品しています。具体的には、&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;企業向けのランディングページ（採用LP・サービスLPなど）をAIでコーディングして &lt;a href="https://vercel.com/"&gt;Vercel&lt;/a&gt; に公開&lt;/li&gt;
+&lt;li&gt;公営競技（競馬・競艇）の&lt;strong&gt;予想ツール&lt;/strong&gt;：出走表や結果を自動取得し、AIで着順を予測、的中率・回収率・損益まで記録する仕組み&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;X（旧Twitter）の自動投稿スクリプト&lt;/strong&gt;：API連携（OAuth認証）を自前で実装&lt;/li&gt;
+&lt;li&gt;ECサイトの&lt;strong&gt;在庫・価格の自動同期ツール&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;そして、&lt;strong&gt;このブログ自体&lt;/strong&gt;（Hugo + GitHub Pages）の構築・改修&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;といったものを、AIに手伝ってもらいながら作ってきました。だからこの記事は「公式サイトの料金表を並べただけ」の比較ではなく、&lt;strong&gt;実際に動くものを作る過程で感じた、各ツールの効きどころと限界&lt;/strong&gt;を中心に書きます。&lt;/p&gt;
+&lt;h2 id="結論万能の1位はない使い方で選ぶ"&gt;結論：万能の1位はない。使い方で選ぶ&lt;/h2&gt;
 &lt;p&gt;AIコーディングツールは「どれが一番か」よりも「自分の開発スタイルに合うか」で選ぶのが正解です。先に結論を書くと、2026年初頭の時点では次のように考えると失敗しにくいです。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;すでにVS Codeを使っていて、まず無料で試したい人&lt;/strong&gt; → GitHub Copilot（無料枠あり）か Codeium。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;AIを中心に据えたエディタで、コードベース全体を理解させながら書きたい人&lt;/strong&gt; → Cursor か Windsurf。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ターミナルや既存環境のまま、大きめのリファクタやタスクをAIに任せたい人&lt;/strong&gt; → Claude Code。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ターミナルや既存環境のまま、機能やツールを丸ごと任せたい人&lt;/strong&gt; → Claude Code（筆者のメイン）。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;ひとつ前置きしておくと、これらはどれも「補助」であり、生成されたコードはそのまま信用せず必ず自分で読んで検証する前提のツールです。ここを踏まえたうえで、各ツールの違いを具体的に見ていきます。&lt;/p&gt;
 &lt;p&gt;なお、かつて人気だったコード補完ツール「Kite」はすでにサービスを終了しており、現在は使えません。古い記事で1位に挙げられていることがありますが、選択肢から外してください。&lt;/p&gt;
@@ -28,19 +38,4 @@
 &lt;p&gt;どちらも無料で始められますが、無料枠の範囲やチーム向け機能は変わりやすいので、各公式サイトで確認してください。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;向いている人&lt;/strong&gt;：まずは無料の補完だけでも導入したい個人や、社内の巨大リポジトリを横断検索しながら開発したいチーム。&lt;/p&gt;
 &lt;h2 id="claude-codeターミナルから任せるエージェント型"&gt;Claude Code：ターミナルから任せるエージェント型&lt;/h2&gt;
-&lt;p&gt;&lt;a href="https://www.claude.com/product/claude-code"&gt;Claude Code&lt;/a&gt; は、Anthropicが提供するコマンドライン型のコーディングエージェントです。エディタに補完を出すのではなく、ターミナル（やエディタ拡張）から「この機能を実装して」「このバグを直して」と指示すると、AIが関連ファイルを読み、変更を加え、必要ならテストまで実行する、という任せ方ができます。&lt;/p&gt;
-&lt;p&gt;既存の開発環境やシェルをそのまま使える点が利点で、リファクタリングやまとまったタスクの自動化に向いています。利用には対応するプランやAPI利用が必要なので、課金形態は&lt;a href="https://www.claude.com/product/claude-code"&gt;公式サイトで最新料金を確認&lt;/a&gt;してください。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;向いている人&lt;/strong&gt;：補完よりも「タスクごと任せたい」実務者。既存のターミナル中心のワークフローを崩したくない人。&lt;/p&gt;
-&lt;p&gt;なお、AIに何をどう指示するかで結果は大きく変わります。指示文の組み立て方に不安があれば、&lt;a href="https://ai-navi-tools.net/posts/chatgpt-%E3%83%97%E3%83%AD%E3%83%B3%E3%83%97%E3%83%88-%E4%BB%95%E4%BA%8B-%E5%8A%B9%E7%8E%87%E5%8C%96/"&gt;ChatGPTのプロンプト活用術&lt;/a&gt;も合わせて読むと、コーディング指示の精度を上げるヒントになります。&lt;/p&gt;
-&lt;h2 id="chatgptなど汎用aiという選択肢"&gt;ChatGPTなど汎用AIという選択肢&lt;/h2&gt;
-&lt;p&gt;エディタに統合しなくても、&lt;a href="https://chat.openai.com/"&gt;ChatGPT&lt;/a&gt; のような汎用チャットAIをブラウザで開き、エラーメッセージを貼って原因を聞いたり、関数の雛形を作ってもらう使い方も依然として有効です。専用ツールを入れる前の入り口として、また設計やアルゴリズムを相談する壁打ち相手として優秀です。&lt;/p&gt;
-&lt;p&gt;ChatGPTとClaudeのどちらをコーディングの相棒にするか迷う場合は、&lt;a href="https://ai-navi-tools.net/posts/claude-chatgpt-%E6%AF%94%E8%BC%83-%E3%81%A9%E3%81%A3%E3%81%A1/"&gt;ChatGPTとClaudeの比較記事&lt;/a&gt;も判断材料になります。&lt;/p&gt;
-&lt;h2 id="選ぶときの注意点"&gt;選ぶときの注意点&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;生成コードは必ず検証する&lt;/strong&gt;：AIの提案は誤りを含むことがあります。動作確認とレビューは人間の責任です。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;機密情報の扱い&lt;/strong&gt;：社外秘のコードを送信してよいか、社内ルールやツール設定（学習に使われるか）を事前に確認しましょう。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;ライセンス&lt;/strong&gt;：生成コードが既存コードに酷似する可能性を意識し、ライセンス上問題がないか確認する習慣を持つと安全です。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;料金は変わる&lt;/strong&gt;：この分野は改定が頻繁なため、金額は必ず公式サイトの最新情報で判断してください。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
-&lt;p&gt;2026年初頭のAIコーディングツールは、用途で住み分けがはっきりしてきました。まず無料で補完を試すなら &lt;strong&gt;GitHub Copilot&lt;/strong&gt; や &lt;strong&gt;Codeium&lt;/strong&gt;、AI中心のエディタに移るなら &lt;strong&gt;Cursor&lt;/strong&gt; や &lt;strong&gt;Windsurf&lt;/strong&gt;、ターミナルからタスクごと任せるなら &lt;strong&gt;Claude Code&lt;/strong&gt;、相談相手としては &lt;strong&gt;ChatGPT&lt;/strong&gt; や Claude といった整理になります。&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;&lt;a href="https://www.claude.com/product/claude-code"&gt;Claude Code&lt;/a&gt; は、Anthropicが提供するコマンドライン型のコーディングエージェントです。エディタに補完を出すのではなく、ターミナル（やエディタ拡張）から「この機能を実装して」「このバグを直して」と指示すると、AIが関連ファイルを読み、変更を加え、必要ならテストまで実行する、という任せ方ができます。&lt;/p&gt;</description></item></channel></rss>
