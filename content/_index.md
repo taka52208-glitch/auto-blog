@@ -16,4 +16,9 @@ aliases:
   - /posts/chatgpt-使えない-制限-代替/
   - /posts/ai-業務効率化-ツール-事例/
   - /posts/ai-写真加工-副業-稼ぐ/
+  - /posts/ai副業-始め方-初心者-稼ぎ方/
+  - /posts/adobe-firefly-料金-無料-範囲/
+  - /posts/aiデザインツール-無料-おすすめ/
+  - /posts/runway-動画生成-使い方-初心者/
+  - /posts/ai文章作成ツール-おすすめ-無料/
 ---
