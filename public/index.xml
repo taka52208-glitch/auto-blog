@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI Tools Lab - AIツール比較＆活用ガイド</title><link>https://ai-navi-tools.net/</link><description>Recent content on AI Tools Lab - AIツール比較＆活用ガイド</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Mon, 22 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://ai-navi-tools.net/index.xml" rel="self" type="application/rss+xml"/><item><title>AdSenseに4回落ちた実体験｜「有用性の低いコンテンツ」を抜け出すためにやったこと</title><link>https://ai-navi-tools.net/posts/adsense-%E5%AF%A9%E6%9F%BB-%E8%90%BD%E3%81%A1%E3%81%9F-%E6%9C%89%E7%94%A8%E6%80%A7%E3%81%AE%E4%BD%8E%E3%81%84%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84-%E5%AF%BE%E7%AD%96/</link><pubDate>Mon, 22 Jun 2026 00:00:00 +0000</pubDate><guid>https://ai-navi-tools.net/posts/adsense-%E5%AF%A9%E6%9F%BB-%E8%90%BD%E3%81%A1%E3%81%9F-%E6%9C%89%E7%94%A8%E6%80%A7%E3%81%AE%E4%BD%8E%E3%81%84%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84-%E5%AF%BE%E7%AD%96/</guid><description>&lt;p&gt;この記事は、まさに今あなたが読んでいるこのブログ「AI Tools Lab」が、Google AdSenseの審査で &lt;strong&gt;「有用性の低いコンテンツ」を理由に4回不承認になった実体験&lt;/strong&gt; の記録です。ネットで「AdSense 落ちた 対策」と検索すると、審査に通ったことのない人が書いた一般論ばかりが出てきます。この記事は違います。実際に落ち続けている当事者が、何をやって、何が効かなかったかをリアルタイムで書いています。&lt;/p&gt;
-&lt;p&gt;正直に言うと、この記事を書いている時点でまだ審査には通っていません。通ったら追記しますが、通っていない今だからこそ書ける生々しさがあると思っています。&lt;/p&gt;
-&lt;h2 id="不承認の経緯4回連続で同じ理由"&gt;不承認の経緯：4回連続で同じ理由&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI Tools Lab - AIツール比較＆活用ガイド</title><link>https://ai-navi-tools.net/</link><description>Recent content on AI Tools Lab - AIツール比較＆活用ガイド</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Sun, 28 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://ai-navi-tools.net/index.xml" rel="self" type="application/rss+xml"/><item><title>AdSenseに5回落ちてアカウント閉鎖された全記録｜AI記事量産の末路と教訓</title><link>https://ai-navi-tools.net/posts/adsense-%E5%AF%A9%E6%9F%BB-%E8%90%BD%E3%81%A1%E3%81%9F-%E6%9C%89%E7%94%A8%E6%80%A7%E3%81%AE%E4%BD%8E%E3%81%84%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84-%E5%AF%BE%E7%AD%96/</link><pubDate>Mon, 22 Jun 2026 00:00:00 +0000</pubDate><guid>https://ai-navi-tools.net/posts/adsense-%E5%AF%A9%E6%9F%BB-%E8%90%BD%E3%81%A1%E3%81%9F-%E6%9C%89%E7%94%A8%E6%80%A7%E3%81%AE%E4%BD%8E%E3%81%84%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84-%E5%AF%BE%E7%AD%96/</guid><description>&lt;p&gt;この記事は、まさに今あなたが読んでいるこのブログ「AI Tools Lab」が、Google AdSenseの審査で &lt;strong&gt;「有用性の低いコンテンツ」を理由に5回連続不承認になり、最終的にアカウントを閉鎖された実体験&lt;/strong&gt; の全記録です。&lt;/p&gt;
+&lt;p&gt;ネットで「AdSense 落ちた 対策」と検索すると、通った人の事後報告か、通ったことのない人の一般論ばかり出てきます。この記事は違います。&lt;strong&gt;5回落ちてアカウントごと消された人間&lt;/strong&gt;が、何をやり、何が効かなかったかを全部書きます。&lt;/p&gt;
+&lt;p&gt;先に結論を言うと、このサイトはAdSenseに通りませんでした。でも、この経験から得た教訓は、ブログ運営やAI活用を考えている人に確実に役立つと思っています。&lt;/p&gt;
+&lt;h2 id="不承認の経緯5回連続で同じ理由アカウント閉鎖"&gt;不承認の経緯：5回連続で同じ理由→アカウント閉鎖&lt;/h2&gt;
 &lt;p&gt;まず時系列を整理します。&lt;/p&gt;
 &lt;table&gt;
 	&lt;thead&gt;
@@ -36,9 +37,15 @@
 					&lt;td&gt;有用性の低いコンテンツ&lt;/td&gt;
 					&lt;td&gt;14本（さらに削除後）&lt;/td&gt;
 			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;5回目&lt;/td&gt;
+					&lt;td&gt;6月25日&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;アカウント閉鎖&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;11本（さらに削除＋新規2本追加後）&lt;/td&gt;
+			&lt;/tr&gt;
 	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;4回とも理由は同じです。「有用性の低いコンテンツ」——つまりGoogleから見て「このサイトに広告を出す価値がない」と判断されたということです。&lt;/p&gt;
+&lt;p&gt;5回とも理由は同じ「有用性の低いコンテンツ」。そして5回目の審査後、不承認の通知ではなく &lt;strong&gt;「お支払いアカウントがキャンセルされました」&lt;/strong&gt; というメールが届きました。管理画面にアクセスすると403エラー。つまり、審査に落ちたのではなく、&lt;strong&gt;アカウント自体を閉じられた&lt;/strong&gt;のです。&lt;/p&gt;
 &lt;h2 id="そもそも何が悪かったのか"&gt;そもそも何が悪かったのか&lt;/h2&gt;
 &lt;p&gt;このブログは2026年4月に立ち上げました。最初の方針は「AIツールの記事をたくさん書いて、検索流入でAdSenseとアフィリエイトで稼ぐ」というものでした。&lt;/p&gt;
 &lt;p&gt;そこで私がやったのは、&lt;strong&gt;AIで記事を量産すること&lt;/strong&gt;でした。&lt;/p&gt;
@@ -71,11 +78,7 @@
 &lt;p&gt;22本から14本に削減しました。基準は「この記事に、自分の体験が1つでも入っているか」。入っていない記事は容赦なく削除しました。具体的に削ったのは、GPT-5の予想記事、AI英語学習のまとめ、AIナレーション副業の紹介など、自分が触ったことのないツールの紹介記事です。&lt;/p&gt;
 &lt;h3 id="やったこと残した記事に一次情報を注入"&gt;やったこと②：残した記事に一次情報を注入&lt;/h3&gt;
 &lt;p&gt;たとえばAIコーディングツールの記事には、自分が実際に開発した案件の話を入れました。ランディングページ、データ取得の自動化ツール、OAuth認証の実装、このブログ自体の構築——こうした「自分の手を動かした」経験を具体的に書きました。&lt;/p&gt;
-&lt;p&gt;Claude vs ChatGPTの比較記事には、毎日の仕事での実際の使い分けを表にしました。「コーディングはClaude、アイデア出しはChatGPT」のように、自分の用途に基づいた比較です。&lt;/p&gt;
-&lt;h3 id="やったことaboutページを全面改訂"&gt;やったこと③：Aboutページを全面改訂&lt;/h3&gt;
-&lt;p&gt;「AI Tools Lab運営者」という匿名的な紹介をやめ、実際に何を作っている人間なのかを具体的に書きました。AIコーディングツールで開発をしていること、ChatGPTとClaudeを毎日使っていること、このブログ自体をHugoとGitHub Pagesで自分で構築していること。&lt;/p&gt;
-&lt;p&gt;さらに、記事を量産して失敗した経験と、そこからの方針転換を正直に書きました。&lt;/p&gt;
-&lt;p&gt;結果：&lt;strong&gt;4回目も不承認。&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>Claude Codeでブログを作った全記録｜Hugo構築からデプロイまでAIコーディングだけで完走した話</title><link>https://ai-navi-tools.net/posts/claude-code-%E3%83%96%E3%83%AD%E3%82%B0%E6%A7%8B%E7%AF%89-%E4%BD%93%E9%A8%93%E8%A8%98/</link><pubDate>Mon, 22 Jun 2026 00:00:00 +0000</pubDate><guid>https://ai-navi-tools.net/posts/claude-code-%E3%83%96%E3%83%AD%E3%82%B0%E6%A7%8B%E7%AF%89-%E4%BD%93%E9%A8%93%E8%A8%98/</guid><description>&lt;p&gt;「AIコーディングツールでブログを作れる」と聞いても、実際にどこまでできるのかイメージしにくいと思います。この記事では、まさにあなたが今読んでいるこのブログ「AI Tools Lab」を、&lt;strong&gt;AIコーディングツールのClaude Codeを使って構築した全工程&lt;/strong&gt;を記録します。&lt;/p&gt;
+&lt;p&gt;Claude vs ChatGPTの比較記事には、毎日の仕事での実際の使い分けを表にしました。「コーディングはClaude、アイデア出しはChatGPT」のように、自分の用途に基づいた比較です。&lt;/p&gt;</description></item><item><title>Claude Codeでブログを作った全記録｜Hugo構築からデプロイまでAIコーディングだけで完走した話</title><link>https://ai-navi-tools.net/posts/claude-code-%E3%83%96%E3%83%AD%E3%82%B0%E6%A7%8B%E7%AF%89-%E4%BD%93%E9%A8%93%E8%A8%98/</link><pubDate>Mon, 22 Jun 2026 00:00:00 +0000</pubDate><guid>https://ai-navi-tools.net/posts/claude-code-%E3%83%96%E3%83%AD%E3%82%B0%E6%A7%8B%E7%AF%89-%E4%BD%93%E9%A8%93%E8%A8%98/</guid><description>&lt;p&gt;「AIコーディングツールでブログを作れる」と聞いても、実際にどこまでできるのかイメージしにくいと思います。この記事では、まさにあなたが今読んでいるこのブログ「AI Tools Lab」を、&lt;strong&gt;AIコーディングツールのClaude Codeを使って構築した全工程&lt;/strong&gt;を記録します。&lt;/p&gt;
 &lt;p&gt;私はフリーランスでWeb制作や自動化ツールの開発をしています。普段からClaude Codeをメインのコーディングツールとして使っていますが、このブログは「AIコーディングだけでどこまでできるか」を試す実験でもありました。結論から言うと、&lt;strong&gt;ブログの構築自体はClaude Codeだけで完走できました。&lt;/strong&gt; ただし「全自動で楽々」とは程遠く、指示の出し方と人間の判断が品質を大きく左右します。&lt;/p&gt;
 &lt;h2 id="なぜhugoを選んだか"&gt;なぜHugoを選んだか&lt;/h2&gt;
 &lt;p&gt;ブログならWordPressが定番ですが、私はHugo（静的サイトジェネレーター）を選びました。理由は3つです。&lt;/p&gt;
@@ -855,6 +858,15 @@
 &lt;h2 id="免責事項"&gt;免責事項&lt;/h2&gt;
 &lt;p&gt;当ブログの情報は執筆時点のものであり、正確性・最新性を保証するものではありません。各ツールのご利用やご契約は、必ず公式サイトの最新情報・利用規約をご確認のうえ、ご自身の判断でお願いいたします。当ブログの情報により生じた損害について、当方は責任を負いかねます。&lt;/p&gt;
 &lt;p&gt;なお、当ブログには一部アフィリエイトリンク（成果報酬型広告）を含みます。紹介内容は実際の使用感に基づいており、報酬の有無によって評価を変えることはありません。&lt;/p&gt;
+&lt;h2 id="制作のご相談"&gt;制作のご相談&lt;/h2&gt;
+&lt;p&gt;運営者はAIツール（Claude Code等）を活用したWeb制作・自動化ツール開発を行っています。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;対応できること：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ランディングページ・Webサイト制作&lt;/li&gt;
+&lt;li&gt;業務自動化ツールの開発（データ取得・API連携・在庫同期など）&lt;/li&gt;
+&lt;li&gt;AIを活用したアプリ・ツール開発&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;「こんなことできる？」という段階でもお気軽にご連絡ください。&lt;/p&gt;
 &lt;h2 id="お問い合わせ"&gt;お問い合わせ&lt;/h2&gt;
-&lt;p&gt;ご質問やご要望がありましたら、お気軽にご連絡ください。&lt;/p&gt;
+&lt;p&gt;ご質問・制作のご相談はこちらまで。&lt;/p&gt;
 &lt;p&gt;メール: &lt;a href="mailto:taka52208@gmail.com"&gt;taka52208@gmail.com&lt;/a&gt;&lt;/p&gt;</description></item></channel></rss>

@@ -4,17 +4,6 @@
     <h1 class="f2">{{ .Site.Title }}</h1>
     <p class="f4 lh-copy mid-gray">{{ .Site.Params.description }}</p>
 
-    <!-- トップAdSense広告枠（審査通過後にコメントを外す） -->
-    <!-- <div style="margin: 1.5rem 0; text-align: center;">
-      <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-3165615110181779"
-        data-ad-slot="あなたのスロットID"
-        data-ad-format="auto"
-        data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div> -->
-
     <!-- カテゴリナビ -->
     <div style="margin: 1.5rem 0; display: flex; gap: 0.5rem; flex-wrap: wrap;">
       {{ range .Site.Taxonomies.categories }}
@@ -38,18 +27,6 @@
       <p class="mid-gray" style="margin: 0;">{{ .Summary | truncate 120 }}</p>
     </article>
 
-    <!-- 5記事ごとにAdSense広告枠（審査通過後にコメントを外す） -->
-    <!-- {{ if modBool (add $.Paginator.PageNumber 1) 5 }}
-    <div style="margin: 1.5rem 0; text-align: center;">
-      <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-3165615110181779"
-        data-ad-slot="あなたのスロットID"
-        data-ad-format="auto"
-        data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-    {{ end }} -->
     {{ end }}
 
     {{ template "_internal/pagination.html" . }}
