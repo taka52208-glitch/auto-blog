@@ -1,11 +1,8 @@
-name: 朝の自動記事投稿
+name: 週1自動記事投稿
 
 on:
-  # 【一時停止中】AdSense再審査が通るまで自動投稿を止めています。
-  # 低品質な自動生成記事が増えると「有用性の低いコンテンツ」で再び落ちるため。
-  # 再開する場合は下の schedule の2行のコメントを外してください。
-  # schedule:
-  #   - cron: '17 0 * * *'   # 朝9時(JST)
+  schedule:
+    - cron: '0 0 * * 1'   # 毎週月曜 朝9時(JST = UTC+9)
   workflow_dispatch:
 
 permissions:
