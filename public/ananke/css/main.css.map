@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "main.css",
-	"sourceRoot": "/home/taka5/稼げるツール/auto-blog",
+	"sourceRoot": "/home/runner/work/auto-blog/auto-blog",
 	"sources": [
 		"ananke/css/main.css"
 	],
