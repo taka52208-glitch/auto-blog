@@ -100,6 +100,38 @@ ARTICLE_TEMPLATES = [
     {"keyword": "AI Web制作 案件 取り方 初心者", "type": "howto"},
     {"keyword": "ChatGPT 提案書 見積もり フリーランス 活用", "type": "howto"},
     {"keyword": "AI 業務自動化 ツール開発 受注 方法", "type": "howto"},
+
+    # ===== AIコーディング追加 =====
+    {"keyword": "Cursor 使い方 初心者 始め方 2026", "type": "howto"},
+    {"keyword": "Claude Code ターミナル 開発 効率化", "type": "howto"},
+    {"keyword": "AIコーディング セキュリティ 注意点 リスク", "type": "problem"},
+    {"keyword": "AI コードレビュー 自動化 やり方", "type": "howto"},
+    {"keyword": "AIコーディング デバッグ 使い方 実例", "type": "howto"},
+    {"keyword": "Windsurf Cursor 比較 AIエディタ 2026", "type": "comparison"},
+    {"keyword": "AI プログラミング 独学 ロードマップ 初心者", "type": "howto"},
+    {"keyword": "ChatGPT API 使い方 Python 入門", "type": "howto"},
+
+    # ===== ChatGPT / Claude 活用追加 =====
+    {"keyword": "Claude 3.5 Sonnet 使い方 活用例", "type": "howto"},
+    {"keyword": "ChatGPT 画像生成 DALL-E 使い方 実例", "type": "howto"},
+    {"keyword": "AI 翻訳 DeepL ChatGPT 比較 精度", "type": "comparison"},
+    {"keyword": "ChatGPT リサーチ 情報収集 仕事 コツ", "type": "howto"},
+    {"keyword": "AI 文章校正 推敲 ツール おすすめ", "type": "howto"},
+    {"keyword": "Perplexity AI 使い方 検索 違い", "type": "howto"},
+    {"keyword": "ChatGPT プラグイン おすすめ 仕事 活用", "type": "howto"},
+    {"keyword": "AI スライド プレゼン 自動作成 方法", "type": "howto"},
+
+    # ===== ブログ・SEO追加 =====
+    {"keyword": "ブログ アクセスゼロ 原因 対策 初心者", "type": "problem"},
+    {"keyword": "AI SEOライティング コツ 上位表示 方法", "type": "howto"},
+    {"keyword": "ブログ 収益化 アフィリエイト ASP おすすめ", "type": "howto"},
+    {"keyword": "個人ブログ 続かない 継続 コツ 習慣化", "type": "problem"},
+
+    # ===== AI副業・ビジネス追加 =====
+    {"keyword": "AI 動画編集 副業 始め方 ツール", "type": "howto"},
+    {"keyword": "ChatGPT ココナラ 出品 稼ぎ方 実例", "type": "howto"},
+    {"keyword": "AI ノーコード アプリ開発 副業 始め方", "type": "howto"},
+    {"keyword": "フリーランス ポートフォリオ 作り方 AI活用", "type": "howto"},
 ]
 
 # ブログ記事に関連するキーワードのみXserverリンクを出す
@@ -434,7 +466,7 @@ slug: "{slug}"
 
 
 MIN_ARTICLE_LENGTH = 2500
-MAX_RETRIES = 2
+MAX_RETRIES = 5
 
 
 def validate_article(article):

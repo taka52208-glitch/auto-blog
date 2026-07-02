@@ -1,8 +1,8 @@
-name: 週1自動記事投稿
+name: 毎日自動記事投稿
 
 on:
   schedule:
-    - cron: '0 0 * * 1'   # 毎週月曜 朝9時(JST = UTC+9)
+    - cron: '0 0 * * *'   # 毎日朝9時(JST = UTC+9)
   workflow_dispatch:
 
 permissions:
