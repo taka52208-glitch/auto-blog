@@ -16,4 +16,12 @@
     <priority>0.8</priority>
   </url>
   {{- end }}
+  {{- range where .Data.Pages "Kind" "section" }}
+  <url>
+    <loc>{{ .Permalink }}</loc>
+    <lastmod>{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  {{- end }}
 </urlset>

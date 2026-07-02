@@ -35,33 +35,46 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python scripts/generate_article.py
 
-      - name: Hugo セットアップ
+      - name: 記事が生成されたか確認
+        id: check_article
+        run: |
+          if git diff --name-only | grep -q "^content/posts/"; then
+            echo "generated=true" >> "$GITHUB_OUTPUT"
+            echo "新しい記事が生成されました"
+          else
+            echo "generated=false" >> "$GITHUB_OUTPUT"
+            echo "記事が品質基準を満たさなかったため、投稿をスキップします"
+          fi
+
+      - name: 変更をコミット＆プッシュ
+        if: steps.check_article.outputs.generated == 'true'
+        run: |
+          git config user.name "Auto Blog Bot"
+          git config user.email "bot@example.com"
+          git add content/posts/
+          git diff --cached --quiet || git commit -m "auto: 記事追加 $(date +%Y-%m-%d-%H%M)"
+          git push
+
+      - name: Hugo セットアップ（デプロイ用）
+        if: steps.check_article.outputs.generated == 'true'
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
           extended: true
 
-      - name: 旧ビルド成果物をクリーン（stale URL混入防止）
-        run: rm -rf public/*
-
       - name: サイトをビルド
+        if: steps.check_article.outputs.generated == 'true'
         run: hugo --minify
 
-      - name: 変更をコミット＆プッシュ
-        run: |
-          git config user.name "Auto Blog Bot"
-          git config user.email "bot@example.com"
-          git add -A
-          git diff --cached --quiet || git commit -m "auto: 記事追加 $(date +%Y-%m-%d-%H%M)"
-          git push
-
       - name: GitHub Pages にデプロイ
+        if: steps.check_article.outputs.generated == 'true'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
 
       - name: Xに自動ポスト
+        if: steps.check_article.outputs.generated == 'true'
         env:
           X_API_KEY: ${{ secrets.X_API_KEY }}
           X_API_SECRET: ${{ secrets.X_API_SECRET }}
