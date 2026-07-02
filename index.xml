@@ -1,4 +1,96 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI Tools Lab - AIツール比較＆活用ガイド</title><link>https://ai-navi-tools.net/</link><description>Recent content on AI Tools Lab - AIツール比較＆活用ガイド</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Sun, 28 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://ai-navi-tools.net/index.xml" rel="self" type="application/rss+xml"/><item><title>AIコーディングツールでWeb制作を受注した体験記｜実際の案件でどう使っているか</title><link>https://ai-navi-tools.net/posts/ai-web%E5%88%B6%E4%BD%9C-%E3%83%95%E3%83%AA%E3%83%BC%E3%83%A9%E3%83%B3%E3%82%B9-%E4%BD%93%E9%A8%93%E8%A8%98/</link><pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate><guid>https://ai-navi-tools.net/posts/ai-web%E5%88%B6%E4%BD%9C-%E3%83%95%E3%83%AA%E3%83%BC%E3%83%A9%E3%83%B3%E3%82%B9-%E4%BD%93%E9%A8%93%E8%A8%98/</guid><description>&lt;p&gt;この記事は、AIコーディングツール（主にClaude Code）を使ってフリーランスとしてWeb制作や自動化ツールの開発を受注している筆者が、&lt;strong&gt;実際の案件でAIをどう使っているか&lt;/strong&gt;をまとめた体験記です。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI Tools Lab - AIツール比較＆活用ガイド</title><link>https://ai-navi-tools.net/</link><description>Recent content on AI Tools Lab - AIツール比較＆活用ガイド</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Thu, 02 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://ai-navi-tools.net/index.xml" rel="self" type="application/rss+xml"/><item><title>AIブログ記事量産はやめとけ｜47本書いて全部ムダにした失敗談</title><link>https://ai-navi-tools.net/posts/ai%E3%83%96%E3%83%AD%E3%82%B0-%E5%A4%B1%E6%95%97%E8%AB%87-%E9%87%8F%E7%94%A3-%E3%82%84%E3%82%81%E3%81%A8%E3%81%91/</link><pubDate>Thu, 02 Jul 2026 00:00:00 +0000</pubDate><guid>https://ai-navi-tools.net/posts/ai%E3%83%96%E3%83%AD%E3%82%B0-%E5%A4%B1%E6%95%97%E8%AB%87-%E9%87%8F%E7%94%A3-%E3%82%84%E3%82%81%E3%81%A8%E3%81%91/</guid><description>&lt;p&gt;「AIで記事を量産すればブログで稼げる」——この考えで始めた結果、47本の記事をほぼ全部捨てることになりました。&lt;/p&gt;
+&lt;p&gt;結論から書きます。&lt;strong&gt;AIでの記事量産はやめたほうがいい。&lt;/strong&gt; 理由は3つ。Googleに嫌われる、読者の役に立たない、後から直すコストが新しく書くより高い。以下、実際にやった失敗の全記録です。&lt;/p&gt;
+&lt;h2 id="やったこと無料aiで毎日2本の記事を自動生成"&gt;やったこと：無料AIで毎日2本の記事を自動生成&lt;/h2&gt;
+&lt;p&gt;2026年4月にブログを立ち上げました。使ったのはGroq API（無料）経由のLlama 3.3 70B。GitHub Actionsで毎日2本の記事を自動生成し、Hugo + GitHub Pagesで公開する仕組みを作りました。&lt;/p&gt;
+&lt;p&gt;技術的には上手くいきました。スクリプトを回せば記事が勝手に増えていく。1ヶ月で47本。「これで検索流入が来てAdSenseで稼げる」と思っていました。&lt;/p&gt;
+&lt;h2 id="最初の異変全部同じに見える"&gt;最初の異変：全部同じに見える&lt;/h2&gt;
+&lt;p&gt;30本を超えたあたりで気づきました。&lt;strong&gt;記事が全部同じ構成・同じ文体&lt;/strong&gt;です。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;冒頭は必ず「〜と思ったことはありませんか？」&lt;/li&gt;
+&lt;li&gt;見出しの数も並び順もほぼ同じ&lt;/li&gt;
+&lt;li&gt;「意外な事実ですが」というフレーズが全記事に出現&lt;/li&gt;
+&lt;li&gt;料金情報が古い、または存在しない数字が書いてある&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;AIは指示通りに「それっぽい記事」を生成しますが、全記事が同じテンプレートから出てきたように見えます。当然です。同じモデルに同じプロンプトで書かせているのだから。&lt;/p&gt;
+&lt;h2 id="adsense審査5回連続不承認"&gt;AdSense審査：5回連続不承認&lt;/h2&gt;
+&lt;p&gt;Google AdSenseに申請したところ、1回目の審査で「&lt;strong&gt;有用性の低いコンテンツ&lt;/strong&gt;」という理由で不承認になりました。&lt;/p&gt;
+&lt;p&gt;ここからの対応を時系列で書きます。&lt;/p&gt;
+&lt;h3 id="1回目不承認5月18日-とりあえず記事を増やす"&gt;1回目不承認（5月18日）→ とりあえず記事を増やす&lt;/h3&gt;
+&lt;p&gt;「数が足りないのかも」と思い、さらに記事を追加。結果的に47本に。今思えば完全に逆効果でした。低品質な記事を増やしても、サイト全体の評価が下がるだけです。&lt;/p&gt;
+&lt;h3 id="2回目不承認5月30日-25本削除19本リライト"&gt;2回目不承認（5月30日）→ 25本削除・19本リライト&lt;/h3&gt;
+&lt;p&gt;ようやく「量ではなく質の問題だ」と気づきました。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;事実誤認のある記事、薄い記事、重複した内容の記事を&lt;strong&gt;25本削除&lt;/strong&gt;（47→22本）&lt;/li&gt;
+&lt;li&gt;残した記事に事実確認・独自の視点を追加&lt;/li&gt;
+&lt;li&gt;全記事から無関係なアフィリエイトリンク（旅行・転職・免許など）を除去&lt;/li&gt;
+&lt;li&gt;テンプレート語（「意外な事実」等）をサイト全体から消去&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3回目不承認6月11日-さらに7本削除一次情報注入"&gt;3回目不承認（6月11日）→ さらに7本削除・一次情報注入&lt;/h3&gt;
+&lt;p&gt;リライトだけでは足りないと判断。「自分が手を動かした経験が書かれていない記事」をさらに7本削除（22→14本）。残った記事にはすべて、筆者の実体験を引用ブロックで追加しました。&lt;/p&gt;
+&lt;p&gt;Aboutページも全面改修。「AI量産に偏った反省」を正直に開示し、運営者が何者かを具体的に書きました。&lt;/p&gt;
+&lt;h3 id="4回目不承認6月21日-さらに5本削除新規2本追加"&gt;4回目不承認（6月21日）→ さらに5本削除・新規2本追加&lt;/h3&gt;
+&lt;p&gt;一次情報がまったくない記事をさらに5本削除（14→9本）。代わりに完全オリジナルの体験記事を2本追加しました。&lt;/p&gt;
+&lt;h3 id="5回目6月25日-アカウント閉鎖"&gt;5回目（6月25日）→ アカウント閉鎖&lt;/h3&gt;
+&lt;p&gt;5回目の審査結果は「お支払いアカウントがキャンセルされました」。管理画面は403エラー。AdSenseアカウント自体が閉鎖されました。&lt;/p&gt;
+&lt;h2 id="なぜai量産記事はダメなのか"&gt;なぜAI量産記事はダメなのか&lt;/h2&gt;
+&lt;p&gt;失敗から学んだことを整理します。&lt;/p&gt;
+&lt;h3 id="googleは誰が書いたかを見ている"&gt;Googleは「誰が書いたか」を見ている&lt;/h3&gt;
+&lt;p&gt;Googleの品質評価ガイドラインにはE-E-A-T（Experience, Expertise, Authoritativeness, Trustworthiness）という基準があります。このうち**Experience（経験）**が重要です。&lt;/p&gt;
+&lt;p&gt;AIが生成した記事には、書き手の経験がありません。公式サイトの情報をまとめ直しただけの記事は、Googleから見れば「どこにでもある薄い内容」です。Googleはこれを「scaled content abuse」（大量生成されたコンテンツの乱用）と呼んでいます。&lt;/p&gt;
+&lt;h3 id="それっぽいは読者にもバレる"&gt;「それっぽい」は読者にもバレる&lt;/h3&gt;
+&lt;p&gt;AIの生成文は流暢ですが、具体性がありません。「ChatGPTはビジネスで活用できます」——これは誰でも書ける文章です。読者が知りたいのは「どんな場面で、具体的にどう使って、何がうまくいって、何が失敗したか」です。&lt;/p&gt;
+&lt;p&gt;筆者が実際にChatGPTでExcelのVBAを書かせた経験、Claudeで長文の要約をさせた経験——こういう具体的な話がなければ、記事に存在価値がありません。&lt;/p&gt;
+&lt;h3 id="後から直すコストが高すぎる"&gt;後から直すコストが高すぎる&lt;/h3&gt;
+&lt;p&gt;47本の記事をリライトする作業は、新しく書くより時間がかかりました。1本1本内容を確認し、事実誤認を修正し、一次情報を追加し、内部リンクを貼り直す。しかも2本は重複記事だったので統合が必要でした。&lt;/p&gt;
+&lt;p&gt;最初から「自分の経験がある分野で、質の高い記事を少数書く」ほうが圧倒的に効率的です。&lt;/p&gt;
+&lt;h2 id="量産をやめた後どうなったか"&gt;量産をやめた後どうなったか&lt;/h2&gt;
+&lt;p&gt;47本から12本に減らし、全記事に一次情報を入れた状態で運用しています。AdSenseは諦めて、ブログの目的を「フリーランス制作の集客装置」に転換しました。&lt;/p&gt;
+&lt;p&gt;記事数は少ないですが、すべて自分が手を動かした分野の記事です。検索流入はまだほぼゼロですが、これは記事数とドメイン年齢の問題で、量産とは別の課題です。&lt;/p&gt;
+&lt;p&gt;少なくとも「低品質サイト」の烙印を押されるリスクはなくなりました。&lt;/p&gt;
+&lt;h2 id="aiブログで失敗しないためのルール"&gt;AIブログで失敗しないためのルール&lt;/h2&gt;
+&lt;p&gt;この経験から、今のブログ運営で守っているルールです。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;自分が手を動かした分野でしか書かない。&lt;/strong&gt; AIツール比較なら、実際に使っているツールだけ&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AIは下調べと構成案まで。&lt;/strong&gt; 本文は必ず自分の体験・意見を加える&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;量より質。&lt;/strong&gt; 週1本でいい。1本に3000字以上の具体的な内容を入れる&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;テンプレート感を消す。&lt;/strong&gt; 冒頭パターン、見出し構成、文体を記事ごとに変える&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;嘘を書かない。&lt;/strong&gt; 確認できない料金は「公式サイトで確認」と書く&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="まとめ"&gt;まとめ&lt;/h2&gt;
+&lt;p&gt;AIでの記事量産は、短期的には楽に見えます。しかし中長期で見ると、Googleからの評価を下げ、リカバリーに膨大な時間がかかります。&lt;/p&gt;</description></item><item><title>Hugo＋GitHub Pagesでブログを無料で始める手順｜実際に構築した記録</title><link>https://ai-navi-tools.net/posts/hugo-github-pages-%E3%83%96%E3%83%AD%E3%82%B0-%E5%A7%8B%E3%82%81%E6%96%B9-%E7%84%A1%E6%96%99/</link><pubDate>Thu, 02 Jul 2026 00:00:00 +0000</pubDate><guid>https://ai-navi-tools.net/posts/hugo-github-pages-%E3%83%96%E3%83%AD%E3%82%B0-%E5%A7%8B%E3%82%81%E6%96%B9-%E7%84%A1%E6%96%99/</guid><description>&lt;p&gt;このブログ（ai-navi-tools.net）は、Hugo + GitHub Pagesで運用しています。月額のサーバー代はゼロ。かかっているのは独自ドメインの年間維持費だけです。&lt;/p&gt;
+&lt;p&gt;この記事では、Hugoでブログを立ち上げてGitHub Pagesで公開するまでの手順を、実際の構築経験をもとに書きます。&lt;/p&gt;
+&lt;h2 id="hugoとgithub-pagesを選んだ理由"&gt;HugoとGitHub Pagesを選んだ理由&lt;/h2&gt;
+&lt;p&gt;WordPressではなくHugoを選んだ理由は3つあります。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;表示が速い。&lt;/strong&gt; HugoはHTMLを事前に生成する静的サイトジェネレーターです。サーバーでPHPを動かすWordPressと違い、表示速度が圧倒的に速い。Google PageSpeed Insightsのスコアも高く出ます&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;サーバー代がかからない。&lt;/strong&gt; GitHub Pagesは静的サイトを無料でホスティングできます。WordPressだとレンタルサーバー代が月額1,000円前後かかります&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Git管理できる。&lt;/strong&gt; 記事も設定もすべてGitで管理できるため、変更履歴が残り、壊しても戻せます&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;逆にデメリットもあります。コマンドライン操作が必要で、管理画面はありません。プラグインの選択肢もWordPressより少ないです。「記事だけ書きたい」人にはWordPress + &lt;a href="https://px.a8.net/svt/ejp?a8mat=4B1RXW+6JSFM+CO4+3H2QRM"&gt;Xserver&lt;/a&gt;のほうが合います。&lt;/p&gt;
+&lt;h2 id="step-1hugoをインストールする"&gt;Step 1：Hugoをインストールする&lt;/h2&gt;
+&lt;h3 id="macosの場合"&gt;macOSの場合&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;brew install hugo
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="ubuntu--wslの場合"&gt;Ubuntu / WSLの場合&lt;/h3&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;sudo apt update
+sudo apt install hugo
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;インストール後、バージョンを確認します。&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;hugo version
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;v0.120以降が入っていれば問題ありません。古いバージョンだとテーマが動かないことがあるので、その場合は&lt;a href="https://github.com/gohugoio/hugo/releases"&gt;Hugo公式のリリースページ&lt;/a&gt;から最新版をダウンロードしてください。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ハマったポイント：&lt;/strong&gt; Ubuntuのaptで入るHugoはバージョンが古いことがあります。筆者の環境ではaptで入ったのがv0.92で、テーマが正常に動きませんでした。公式から最新版をダウンロードして解決しました。&lt;/p&gt;
+&lt;h2 id="step-2サイトを作成する"&gt;Step 2：サイトを作成する&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;hugo new site my-blog
+cd my-blog
+git init
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;これでサイトの骨格ができます。中身はこうなっています。&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;my-blog/
+├── archetypes/ # 記事テンプレート
+├── content/ # 記事を置く場所
+├── layouts/ # HTMLテンプレート
+├── static/ # 画像・CSS等の静的ファイル
+├── themes/ # テーマ
+└── hugo.toml # 設定ファイル
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="step-3テーマを追加する"&gt;Step 3：テーマを追加する&lt;/h2&gt;
+&lt;p&gt;Hugoは単体ではデザインがありません。テーマを追加します。このブログではAnankeテーマを使っています。&lt;/p&gt;</description></item><item><title>AIコーディングツールでWeb制作を受注した体験記｜実際の案件でどう使っているか</title><link>https://ai-navi-tools.net/posts/ai-web%E5%88%B6%E4%BD%9C-%E3%83%95%E3%83%AA%E3%83%BC%E3%83%A9%E3%83%B3%E3%82%B9-%E4%BD%93%E9%A8%93%E8%A8%98/</link><pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate><guid>https://ai-navi-tools.net/posts/ai-web%E5%88%B6%E4%BD%9C-%E3%83%95%E3%83%AA%E3%83%BC%E3%83%A9%E3%83%B3%E3%82%B9-%E4%BD%93%E9%A8%93%E8%A8%98/</guid><description>&lt;p&gt;この記事は、AIコーディングツール（主にClaude Code）を使ってフリーランスとしてWeb制作や自動化ツールの開発を受注している筆者が、&lt;strong&gt;実際の案件でAIをどう使っているか&lt;/strong&gt;をまとめた体験記です。&lt;/p&gt;
 &lt;p&gt;「AIでプログラミングが楽になる」という話はよく聞きますが、&lt;strong&gt;実際に仕事として使うとどうなのか&lt;/strong&gt;——案件の種類ごとに、使えた場面・使えなかった場面をリアルに書きます。&lt;/p&gt;
 &lt;h2 id="筆者の状況"&gt;筆者の状況&lt;/h2&gt;
 &lt;p&gt;フリーランスとしてWeb制作・ツール開発を行っています。主な作業環境はターミナル上のAIコーディングツール（Claude Code）で、コードの生成・修正・デバッグの大部分をAIと対話しながら進めています。&lt;/p&gt;
