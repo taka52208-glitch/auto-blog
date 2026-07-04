@@ -1,7 +1,8 @@
 """
-自動記事生成スクリプト（v4 — 体験者視点・週1運用）
+自動記事生成スクリプト（v5 — 分割生成・レート制限対策）
+- Groq無料枠（12,000 TPM）対策: 記事を前半・後半の2回に分けて生成
+- 各APIコール間に65秒の待機を入れてTPMリセットを確保
 - 運営者が実際に使っているツール・分野に絞ったキーワード
-- AIツール関連のアフィリエイトリンクのみ（無関係リンク排除）
 - 「体験者として書く」プロンプト
 - 記事間の内部リンク自動生成
 """
@@ -370,33 +371,30 @@ description: "メタディスクリプション（80〜120文字）"
 """
 
 
-def generate_article_with_ai(keyword, article_type, keyword_info):
-    """Groq API（無料）で記事を生成"""
+def call_groq_api(prompt, max_tokens=4000, max_retries=5):
+    """Groq APIを1回呼び出す（レート制限リトライ付き）"""
     api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
         raise ValueError("GROQ_API_KEY が設定されていません")
 
-    prompt = get_prompt(keyword, article_type, keyword_info)
-
-    request_body = json.dumps({
-        "model": "llama-3.3-70b-versatile",
-        "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": 8000,
-        "temperature": 0.7
-    }).encode("utf-8")
-
-    req = urllib.request.Request(
-        "https://api.groq.com/openai/v1/chat/completions",
-        data=request_body,
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {api_key}",
-            "User-Agent": "AutoBlog/1.0"
-        }
-    )
-
-    max_retries = 5
     for attempt in range(max_retries):
+        request_body = json.dumps({
+            "model": "llama-3.3-70b-versatile",
+            "messages": [{"role": "user", "content": prompt}],
+            "max_tokens": max_tokens,
+            "temperature": 0.7
+        }).encode("utf-8")
+
+        req = urllib.request.Request(
+            "https://api.groq.com/openai/v1/chat/completions",
+            data=request_body,
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {api_key}",
+                "User-Agent": "AutoBlog/1.0"
+            }
+        )
+
         try:
             with urllib.request.urlopen(req, timeout=120) as response:
                 result = json.loads(response.read().decode("utf-8"))
@@ -405,20 +403,109 @@ def generate_article_with_ai(keyword, article_type, keyword_info):
             error_body = e.read().decode("utf-8")
             print(f"Groq API Error {e.code}: {error_body}")
             if e.code == 429 and attempt < max_retries - 1:
-                wait = 60 * (attempt + 1)
+                wait = 65
                 print(f"レート制限。{wait}秒待機後リトライ ({attempt + 1}/{max_retries})...")
                 time.sleep(wait)
-                req = urllib.request.Request(
-                    "https://api.groq.com/openai/v1/chat/completions",
-                    data=request_body,
-                    headers={
-                        "Content-Type": "application/json",
-                        "Authorization": f"Bearer {api_key}",
-                        "User-Agent": "AutoBlog/1.0"
-                    }
-                )
                 continue
             raise
+
+
+def generate_article_with_ai(keyword, article_type, keyword_info):
+    """Groq APIで記事を分割生成（レート制限対策）"""
+
+    affiliate_section = build_affiliate_section(keyword)
+    internal_links = build_internal_links(keyword)
+
+    # --- Part 1: アウトライン + 前半（イントロ〜H2を2つ） ---
+    prompt_part1 = f"""あなたは、AIコーディングツールを使ってフリーランスでWeb制作をしている個人ブロガーです。
+ChatGPTとClaudeを毎日仕事で使い、Hugo + GitHub Pagesでブログを運用しています。
+
+以下のキーワードで「自分が実際に使った体験に基づく記事」の**前半部分**を書いてください。
+
+キーワード: {keyword}
+記事タイプ: {article_type}
+
+参考情報:
+{keyword_info}
+
+## 出力する内容
+1. frontmatter（---で囲む。title: 32文字以内, description: 80〜120文字）
+2. 導入文（結論を先に。冒頭100文字以内にキーワード。「〜と思ったことはありませんか？」は禁止）
+3. H2セクションを2つ（各400文字以上。体験者視点で具体的に）
+
+## 体験者として書くルール
+- 「筆者は〜」「実際に使ってみると〜」のように当事者視点で書く
+- 具体的な使用場面（LP制作、API連携、CSV整形など）を例に出す
+- 「使って良かった点」「期待外れだった点」を入れる
+
+## 文体: 親しみやすい口調、短文でテンポよく（1文40文字以内目安）
+## SEO: タイトルにキーワード含む。冒頭にキーワード。比較時はテーブル使用
+
+## 出力形式（これだけ出力。説明や注釈は不要）
+---
+title: "..."
+description: "..."
+date: "{datetime.date.today().isoformat()}"
+categories: ["AIツール"]
+tags: {json.dumps([k for k in keyword.split() if len(k) > 1][:5], ensure_ascii=False)}
+slug: "{keyword.replace(' ', '-').lower()}"
+---
+
+（導入文 + H2セクション2つ）"""
+
+    print("  Part 1: 前半を生成中...")
+    part1 = call_groq_api(prompt_part1, max_tokens=3500)
+    print(f"  Part 1 完了: {len(part1)}文字")
+
+    # レート制限リセットを待つ（TPM=12000、65秒で確実にリセット）
+    print("  レート制限リセット待ち（65秒）...")
+    time.sleep(65)
+
+    # --- Part 2: 後半（H2を2〜3つ + まとめ） ---
+    # part1から本文だけ抽出してコンテキストに渡す
+    part1_body = part1
+    if "---" in part1:
+        parts = part1.split("---", 2)
+        if len(parts) >= 3:
+            part1_body = parts[2].strip()
+
+    # 内部リンクの指示
+    links_instruction = ""
+    if internal_links:
+        links_instruction = f"\n以下の関連記事へのリンクを本文中に自然に挿入:\n{internal_links}\n"
+
+    # アフィリエイトリンクの指示
+    aff_instruction = ""
+    if affiliate_section:
+        aff_instruction = f"\n関連する場合のみ本文中に自然に挿入:\n{affiliate_section}\n"
+
+    prompt_part2 = f"""以下はブログ記事の前半部分です。この続きとして**後半部分**を書いてください。
+
+キーワード: {keyword}
+
+【前半部分（ここまで書いた内容）】
+{part1_body[:1500]}
+
+## 出力する内容（前半の続き）
+1. H2セクションを2〜3つ追加（各400文字以上。前半と内容が被らないこと）
+2. まとめセクション（H2で「まとめ」。要点を簡潔に）
+{links_instruction}{aff_instruction}
+## ルール
+- 体験者視点を維持（「筆者は〜」「実際に〜」）
+- 短文でテンポよく
+- 嘘の情報・根拠不明の数字は禁止
+- H2の前に「---」や frontmatter は書かない。本文の続きだけ出力
+
+## 出力形式: H2セクション2〜3つ + まとめ（本文のみ。説明や注釈は不要）"""
+
+    print("  Part 2: 後半を生成中...")
+    part2 = call_groq_api(prompt_part2, max_tokens=3500)
+    print(f"  Part 2 完了: {len(part2)}文字")
+
+    # --- 結合 ---
+    combined = part1.rstrip() + "\n\n" + part2.lstrip()
+    print(f"  結合後の総文字数: {len(combined)}文字")
+    return combined
 
 
 def save_article(content, keyword):
@@ -466,7 +553,7 @@ slug: "{slug}"
 
 
 MIN_ARTICLE_LENGTH = 2500
-MAX_RETRIES = 5
+MAX_RETRIES = 2
 
 
 def validate_article(article):
@@ -489,7 +576,7 @@ def validate_article(article):
 
 
 def main():
-    print("=== AI Tools Lab 記事生成 v4 ===")
+    print("=== AI Tools Lab 記事生成 v5（分割生成） ===")
     print(f"日時: {datetime.datetime.now()}")
 
     template = select_keyword()
@@ -513,7 +600,8 @@ def main():
         else:
             print(f"品質チェック: NG — {reason}")
             if attempt < MAX_RETRIES:
-                print("再生成します...")
+                print("再生成します...（65秒待機）")
+                time.sleep(65)
 
     is_valid, reason = validate_article(article)
     if not is_valid:
