@@ -411,99 +411,130 @@ def call_groq_api(prompt, max_tokens=4000, max_retries=5):
 
 
 def generate_article_with_ai(keyword, article_type, keyword_info):
-    """Groq APIで記事を分割生成（レート制限対策）"""
+    """Groq APIで記事を3分割生成（レート制限対策）"""
 
     affiliate_section = build_affiliate_section(keyword)
     internal_links = build_internal_links(keyword)
 
-    # --- Part 1: アウトライン + 前半（イントロ〜H2を2つ） ---
-    prompt_part1 = f"""あなたは、AIコーディングツールを使ってフリーランスでWeb制作をしている個人ブロガーです。
-ChatGPTとClaudeを毎日仕事で使い、Hugo + GitHub Pagesでブログを運用しています。
+    today = datetime.date.today().isoformat()
+    tags = json.dumps([k for k in keyword.split() if len(k) > 1][:5], ensure_ascii=False)
+    slug = keyword.replace(' ', '-').lower()
 
-以下のキーワードで「自分が実際に使った体験に基づく記事」の**前半部分**を書いてください。
+    # --- Part 1: frontmatter + 導入文 + H2を1つ ---
+    prompt_part1 = f"""あなたはAIコーディングツールでフリーランスWeb制作をしている個人ブロガーです。
+ChatGPTとClaudeを毎日使い、Hugo + GitHub Pagesでブログを運用しています。
 
-キーワード: {keyword}
-記事タイプ: {article_type}
+キーワード「{keyword}」で体験ベースの記事の**冒頭部分**を書いてください。
 
-参考情報:
-{keyword_info}
+## 出力内容
+1. frontmatter（---で囲む）
+2. 導入文（200文字以上。結論を先に書く。冒頭にキーワードを含む）
+3. 最初のH2セクション1つ（500文字以上。体験者視点で具体的に書く）
 
-## 出力する内容
-1. frontmatter（---で囲む。title: 32文字以内, description: 80〜120文字）
-2. 導入文（結論を先に。冒頭100文字以内にキーワード。「〜と思ったことはありませんか？」は禁止）
-3. H2セクションを2つ（各400文字以上。体験者視点で具体的に）
+## ルール
+- 「筆者は〜」「実際に〜」と当事者視点で書く
+- 具体的な場面（LP制作、API連携、CSV整形など）を出す
+- 短文でテンポよく。「〜と思ったことはありませんか？」は禁止
 
-## 体験者として書くルール
-- 「筆者は〜」「実際に使ってみると〜」のように当事者視点で書く
-- 具体的な使用場面（LP制作、API連携、CSV整形など）を例に出す
-- 「使って良かった点」「期待外れだった点」を入れる
-
-## 文体: 親しみやすい口調、短文でテンポよく（1文40文字以内目安）
-## SEO: タイトルにキーワード含む。冒頭にキーワード。比較時はテーブル使用
-
-## 出力形式（これだけ出力。説明や注釈は不要）
+## 出力形式（これだけ出力）
 ---
-title: "..."
-description: "..."
-date: "{datetime.date.today().isoformat()}"
+title: "（32文字以内、キーワード含む）"
+description: "（80〜120文字）"
+date: "{today}"
 categories: ["AIツール"]
-tags: {json.dumps([k for k in keyword.split() if len(k) > 1][:5], ensure_ascii=False)}
-slug: "{keyword.replace(' ', '-').lower()}"
+tags: {tags}
+slug: "{slug}"
 ---
 
-（導入文 + H2セクション2つ）"""
+（導入文）
 
-    print("  Part 1: 前半を生成中...")
-    part1 = call_groq_api(prompt_part1, max_tokens=3500)
+## （H2見出し）
+
+（本文500文字以上）"""
+
+    print("  Part 1/3: 導入+H2×1を生成中...")
+    part1 = call_groq_api(prompt_part1, max_tokens=3000)
     print(f"  Part 1 完了: {len(part1)}文字")
 
-    # レート制限リセットを待つ（TPM=12000、65秒で確実にリセット）
-    print("  レート制限リセット待ち（65秒）...")
+    print("  65秒待機...")
     time.sleep(65)
 
-    # --- Part 2: 後半（H2を2〜3つ + まとめ） ---
-    # part1から本文だけ抽出してコンテキストに渡す
+    # --- Part 2: H2を2つ ---
     part1_body = part1
     if "---" in part1:
-        parts = part1.split("---", 2)
-        if len(parts) >= 3:
-            part1_body = parts[2].strip()
+        split = part1.split("---", 2)
+        if len(split) >= 3:
+            part1_body = split[2].strip()
 
-    # 内部リンクの指示
-    links_instruction = ""
-    if internal_links:
-        links_instruction = f"\n以下の関連記事へのリンクを本文中に自然に挿入:\n{internal_links}\n"
-
-    # アフィリエイトリンクの指示
-    aff_instruction = ""
-    if affiliate_section:
-        aff_instruction = f"\n関連する場合のみ本文中に自然に挿入:\n{affiliate_section}\n"
-
-    prompt_part2 = f"""以下はブログ記事の前半部分です。この続きとして**後半部分**を書いてください。
+    prompt_part2 = f"""以下のブログ記事の続きを書いてください。
 
 キーワード: {keyword}
 
-【前半部分（ここまで書いた内容）】
-{part1_body[:1500]}
+【ここまでの内容】
+{part1_body[:800]}
 
-## 出力する内容（前半の続き）
-1. H2セクションを2〜3つ追加（各400文字以上。前半と内容が被らないこと）
-2. まとめセクション（H2で「まとめ」。要点を簡潔に）
-{links_instruction}{aff_instruction}
+## 出力内容
+H2セクションを2つ書いてください（各500文字以上）。
+前半と内容が被らないようにしてください。
+
 ## ルール
 - 体験者視点を維持（「筆者は〜」「実際に〜」）
 - 短文でテンポよく
-- 嘘の情報・根拠不明の数字は禁止
-- H2の前に「---」や frontmatter は書かない。本文の続きだけ出力
+- frontmatterや「---」は書かない。H2から始めること
 
-## 出力形式: H2セクション2〜3つ + まとめ（本文のみ。説明や注釈は不要）"""
+## 出力形式（H2セクション2つだけ出力）
+## （H2見出し1）
 
-    print("  Part 2: 後半を生成中...")
-    part2 = call_groq_api(prompt_part2, max_tokens=3500)
+（本文500文字以上）
+
+## （H2見出し2）
+
+（本文500文字以上）"""
+
+    print("  Part 2/3: H2×2を生成中...")
+    part2 = call_groq_api(prompt_part2, max_tokens=3000)
     print(f"  Part 2 完了: {len(part2)}文字")
 
+    print("  65秒待機...")
+    time.sleep(65)
+
+    # --- Part 3: まとめ + 内部リンク + アフィリエイト ---
+    links_instruction = ""
+    if internal_links:
+        links_instruction = f"\n本文中に以下の関連記事リンクを自然に挿入:\n{internal_links}\n"
+
+    aff_instruction = ""
+    if affiliate_section:
+        aff_instruction = f"\n関連する場合のみ自然に挿入:\n{affiliate_section}\n"
+
+    prompt_part3 = f"""以下のブログ記事の最終パートを書いてください。
+
+キーワード: {keyword}
+
+## 出力内容
+1. 実践的なH2セクション1つ（400文字以上。「始める手順」「注意点」「コツ」など実用的な内容）
+2. まとめセクション（H2で「まとめ」。記事全体の要点を箇条書き3〜5個）
+{links_instruction}{aff_instruction}
+## ルール
+- 体験者視点（「筆者は〜」「実際に〜」）
+- 短文でテンポよく
+- frontmatterや「---」は書かない
+
+## 出力形式（本文のみ出力）
+## （H2見出し）
+
+（本文400文字以上）
+
+## まとめ
+
+（要点を箇条書き）"""
+
+    print("  Part 3/3: まとめを生成中...")
+    part3 = call_groq_api(prompt_part3, max_tokens=3000)
+    print(f"  Part 3 完了: {len(part3)}文字")
+
     # --- 結合 ---
-    combined = part1.rstrip() + "\n\n" + part2.lstrip()
+    combined = part1.rstrip() + "\n\n" + part2.strip() + "\n\n" + part3.strip()
     print(f"  結合後の総文字数: {len(combined)}文字")
     return combined
 
@@ -552,7 +583,7 @@ slug: "{slug}"
     return filepath
 
 
-MIN_ARTICLE_LENGTH = 2500
+MIN_ARTICLE_LENGTH = 2000
 MAX_RETRIES = 2
 
 
