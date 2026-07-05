@@ -38,7 +38,7 @@ jobs:
       - name: 記事が生成されたか確認
         id: check_article
         run: |
-          if git diff --name-only | grep -q "^content/posts/"; then
+          if git status --porcelain content/posts/ | grep -q "."; then
             echo "generated=true" >> "$GITHUB_OUTPUT"
             echo "新しい記事が生成されました"
           else
