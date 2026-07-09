@@ -133,6 +133,12 @@ ARTICLE_TEMPLATES = [
     {"keyword": "ChatGPT ココナラ 出品 稼ぎ方 実例", "type": "howto"},
     {"keyword": "AI ノーコード アプリ開発 副業 始め方", "type": "howto"},
     {"keyword": "フリーランス ポートフォリオ 作り方 AI活用", "type": "howto"},
+
+    # ===== Search Console需要ベース追加 =====
+    {"keyword": "Canva 代替 AIデザインツール おすすめ 2026", "type": "comparison"},
+    {"keyword": "GPT-5 最新情報 いつ リリース 2026", "type": "howto"},
+    {"keyword": "Notion AI 料金 高い 代替 比較", "type": "comparison"},
+    {"keyword": "Copilot Pro 契約 価値 レビュー", "type": "comparison"},
 ]
 
 # ブログ記事に関連するキーワードのみXserverリンクを出す
