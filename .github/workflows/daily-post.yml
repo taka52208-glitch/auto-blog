@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '0 0 * * *'   # 毎日朝9時(JST = UTC+9)
   workflow_dispatch:
+    inputs:
+      force_keyword:
+        description: '指定キーワード（空欄ならランダム）'
+        required: false
+        default: ''
 
 permissions:
   contents: write
@@ -33,6 +38,7 @@ jobs:
         timeout-minutes: 15
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          FORCE_KEYWORD: ${{ github.event.inputs.force_keyword }}
         run: python scripts/generate_article.py
 
       - name: 記事が生成されたか確認
