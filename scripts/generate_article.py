@@ -616,9 +616,16 @@ def main():
     print("=== AI Tools Lab 記事生成 v5（分割生成） ===")
     print(f"日時: {datetime.datetime.now()}")
 
-    template = select_keyword()
-    keyword = template["keyword"]
-    article_type = template["type"]
+    # 指定キーワードがあれば優先（環境変数 FORCE_KEYWORD）
+    force_kw = os.environ.get("FORCE_KEYWORD")
+    if force_kw:
+        keyword = force_kw
+        article_type = "howto"
+        print(f"[強制指定] キーワード: {keyword}")
+    else:
+        template = select_keyword()
+        keyword = template["keyword"]
+        article_type = template["type"]
     print(f"キーワード: {keyword}")
     print(f"記事タイプ: {article_type}")
 
