@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ブログ on AI Tools Lab - AIツール比較＆活用ガイド</title><link>https://ai-navi-tools.net/tags/%E3%83%96%E3%83%AD%E3%82%B0/</link><description>Recent content in ブログ on AI Tools Lab - AIツール比較＆活用ガイド</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Mon, 13 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://ai-navi-tools.net/tags/%E3%83%96%E3%83%AD%E3%82%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>ブログアクセスゼロの原因と対策</title><link>https://ai-navi-tools.net/posts/%E3%83%96%E3%83%AD%E3%82%B0-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%BC%E3%83%AD-%E5%8E%9F%E5%9B%A0-%E5%AF%BE%E7%AD%96-%E5%88%9D%E5%BF%83%E8%80%85/</link><pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate><guid>https://ai-navi-tools.net/posts/%E3%83%96%E3%83%AD%E3%82%B0-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%BC%E3%83%AD-%E5%8E%9F%E5%9B%A0-%E5%AF%BE%E7%AD%96-%E5%88%9D%E5%BF%83%E8%80%85/</guid><description>&lt;p&gt;ブログのアクセスがゼロ、というのは初心者のブログ運営者にとっては非常に気分の沈むことです。筆者ももともと、フリーランスのWeb制作をしている個人ブロガーですが、ブログのアクセスがゼロという経験をしています。ChatGPTとClaudeを毎日使い、Hugo + GitHub Pagesでブログを運用していますが、初期の頃は正直なところ、アクセスがゼロということが多々ありました。ただ、そんな中でいろいろと対策を講じて、ようやくアクセスを増やすことができました。そこで、今回はブログのアクセスがゼロの原因と、筆者が実際に試した対策について紹介したいと思います。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>対策 on AI Tools Lab - AIツール比較＆活用ガイド</title><link>https://ai-navi-tools.net/tags/%E5%AF%BE%E7%AD%96/</link><description>Recent content in 対策 on AI Tools Lab - AIツール比較＆活用ガイド</description><generator>Hugo</generator><language>ja</language><lastBuildDate>Mon, 13 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://ai-navi-tools.net/tags/%E5%AF%BE%E7%AD%96/index.xml" rel="self" type="application/rss+xml"/><item><title>ブログアクセスゼロの原因と対策</title><link>https://ai-navi-tools.net/posts/%E3%83%96%E3%83%AD%E3%82%B0-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%BC%E3%83%AD-%E5%8E%9F%E5%9B%A0-%E5%AF%BE%E7%AD%96-%E5%88%9D%E5%BF%83%E8%80%85/</link><pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate><guid>https://ai-navi-tools.net/posts/%E3%83%96%E3%83%AD%E3%82%B0-%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%BC%E3%83%AD-%E5%8E%9F%E5%9B%A0-%E5%AF%BE%E7%AD%96-%E5%88%9D%E5%BF%83%E8%80%85/</guid><description>&lt;p&gt;ブログのアクセスがゼロ、というのは初心者のブログ運営者にとっては非常に気分の沈むことです。筆者ももともと、フリーランスのWeb制作をしている個人ブロガーですが、ブログのアクセスがゼロという経験をしています。ChatGPTとClaudeを毎日使い、Hugo + GitHub Pagesでブログを運用していますが、初期の頃は正直なところ、アクセスがゼロということが多々ありました。ただ、そんな中でいろいろと対策を講じて、ようやくアクセスを増やすことができました。そこで、今回はブログのアクセスがゼロの原因と、筆者が実際に試した対策について紹介したいと思います。&lt;/p&gt;
 &lt;h2 id="ブログアクセスゼロの原因と解決策の概要"&gt;ブログアクセスゼロの原因と解決策の概要&lt;/h2&gt;
 &lt;p&gt;ブログのアクセスがゼロになる原因は、いろいろとありますが、筆者が思うに、大きく分けて二つあります。一つは、ブログの内容が魅力的ではないこと、もう一つは、ブログの露出が不足していることです。内容が魅力的でないと、読者がブログに興味を持ちにくくなります。さらに、露出が不足していると、ブログの存在自体が人に知られにくくなります。筆者は、ブログを始めた当初、コンテンツの質の低さや、SEO対策の不足から、アクセスがゼロになることが多かったです。しかし、ChatGPTやClaudeを活用してコンテンツの作成を支援するようになったり、HugoのテーマやGitHub Pagesの設定を最適化することで、少しずつですがアクセスを増やしていくことができました。具体的には、コンテンツの作成時には、ChatGPTを用いてキーワードリサーチを行ったり、文章の校正を行ったりしました。また、Claudeを用いて、より読み手にとって魅力的で、情報量の高いコンテンツを作成することに焦点を当てました。さらに、Hugoのテーマを変更して、モバイルファーストなデザインに切り替えたところ、スマートフォンからのアクセスが増加しました。GitHub Pagesの設定では、カスタムドメインの設定や、HTTPS化することで、ブログの信頼性を高め、アクセスを増やすことができました。こうした対策を講じることで、ブログのアクセスを増やすことができました。&lt;/p&gt;
 &lt;h2 id="ブログのアクセスを増やすための具体的な対策"&gt;ブログのアクセスを増やすための具体的な対策&lt;/h2&gt;
@@ -15,37 +15,4 @@
 &lt;li&gt;SEO対策を実践する必要があります。&lt;/li&gt;
 &lt;li&gt;ソーシャルメディアを活用してユーザーとの交流を深める必要があります。&lt;/li&gt;
 &lt;li&gt;有料サービスを使用する場合、&lt;a href="https://px.a8.net/svt/ejp?a8mat=4B1RXW+6JSFM+CO4+3H2QRM"&gt;Xserver公式サイト&lt;/a&gt;などの国内シェアNo.1のサービスを検討してみてください。&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title>Hugo＋GitHub Pagesでブログを無料で始める手順｜実際に構築した記録</title><link>https://ai-navi-tools.net/posts/hugo-github-pages-%E3%83%96%E3%83%AD%E3%82%B0-%E5%A7%8B%E3%82%81%E6%96%B9-%E7%84%A1%E6%96%99/</link><pubDate>Thu, 02 Jul 2026 00:00:00 +0000</pubDate><guid>https://ai-navi-tools.net/posts/hugo-github-pages-%E3%83%96%E3%83%AD%E3%82%B0-%E5%A7%8B%E3%82%81%E6%96%B9-%E7%84%A1%E6%96%99/</guid><description>&lt;p&gt;このブログ（ai-navi-tools.net）は、Hugo + GitHub Pagesで運用しています。月額のサーバー代はゼロ。かかっているのは独自ドメインの年間維持費だけです。&lt;/p&gt;
-&lt;p&gt;この記事では、Hugoでブログを立ち上げてGitHub Pagesで公開するまでの手順を、実際の構築経験をもとに書きます。&lt;/p&gt;
-&lt;h2 id="hugoとgithub-pagesを選んだ理由"&gt;HugoとGitHub Pagesを選んだ理由&lt;/h2&gt;
-&lt;p&gt;WordPressではなくHugoを選んだ理由は3つあります。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;表示が速い。&lt;/strong&gt; HugoはHTMLを事前に生成する静的サイトジェネレーターです。サーバーでPHPを動かすWordPressと違い、表示速度が圧倒的に速い。Google PageSpeed Insightsのスコアも高く出ます&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;サーバー代がかからない。&lt;/strong&gt; GitHub Pagesは静的サイトを無料でホスティングできます。WordPressだとレンタルサーバー代が月額1,000円前後かかります&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Git管理できる。&lt;/strong&gt; 記事も設定もすべてGitで管理できるため、変更履歴が残り、壊しても戻せます&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;逆にデメリットもあります。コマンドライン操作が必要で、管理画面はありません。プラグインの選択肢もWordPressより少ないです。「記事だけ書きたい」人にはWordPress + &lt;a href="https://px.a8.net/svt/ejp?a8mat=4B1RXW+6JSFM+CO4+3H2QRM"&gt;Xserver&lt;/a&gt;のほうが合います。&lt;/p&gt;
-&lt;h2 id="step-1hugoをインストールする"&gt;Step 1：Hugoをインストールする&lt;/h2&gt;
-&lt;h3 id="macosの場合"&gt;macOSの場合&lt;/h3&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;brew install hugo
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="ubuntu--wslの場合"&gt;Ubuntu / WSLの場合&lt;/h3&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;sudo apt update
-sudo apt install hugo
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;インストール後、バージョンを確認します。&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;hugo version
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;v0.120以降が入っていれば問題ありません。古いバージョンだとテーマが動かないことがあるので、その場合は&lt;a href="https://github.com/gohugoio/hugo/releases"&gt;Hugo公式のリリースページ&lt;/a&gt;から最新版をダウンロードしてください。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;ハマったポイント：&lt;/strong&gt; Ubuntuのaptで入るHugoはバージョンが古いことがあります。筆者の環境ではaptで入ったのがv0.92で、テーマが正常に動きませんでした。公式から最新版をダウンロードして解決しました。&lt;/p&gt;
-&lt;h2 id="step-2サイトを作成する"&gt;Step 2：サイトを作成する&lt;/h2&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;hugo new site my-blog
-cd my-blog
-git init
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;これでサイトの骨格ができます。中身はこうなっています。&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;my-blog/
-├── archetypes/ # 記事テンプレート
-├── content/ # 記事を置く場所
-├── layouts/ # HTMLテンプレート
-├── static/ # 画像・CSS等の静的ファイル
-├── themes/ # テーマ
-└── hugo.toml # 設定ファイル
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="step-3テーマを追加する"&gt;Step 3：テーマを追加する&lt;/h2&gt;
-&lt;p&gt;Hugoは単体ではデザインがありません。テーマを追加します。このブログではAnankeテーマを使っています。&lt;/p&gt;</description></item></channel></rss>
+&lt;/ul&gt;</description></item></channel></rss>
