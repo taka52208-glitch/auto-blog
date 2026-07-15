@@ -21,4 +21,18 @@ aliases:
   - /posts/aiデザインツール-無料-おすすめ/
   - /posts/runway-動画生成-使い方-初心者/
   - /posts/ai文章作成ツール-おすすめ-無料/
+  - /tags/canva/
+  - /tags/aiスライド作成/
+  - /tags/節約方法/
+  - /tags/自動/
+  - /tags/copilot/
+  - /tags/個人/
+  - /tags/aiプレゼン作成ツール/
+  - /auto-blog/privacy/
+  - /auto-blog/tags/始め方/
+  - /auto-blog/about/
+  - /auto-blog/tags/ai副業/
+  - /auto-blog/tags/初心者/
+  - /auto-blog/categories/aiツール/
+  - /auto-blog/
 ---
