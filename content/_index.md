@@ -35,4 +35,7 @@ aliases:
   - /auto-blog/tags/初心者/
   - /auto-blog/categories/aiツール/
   - /auto-blog/
+  - /posts/google-ai-新サービス-まとめ/
+  - /posts/chatgpt-プロンプト-仕事-効率化/
+  - /posts/ai-プログラミング学習-独学-おすすめ/
 ---

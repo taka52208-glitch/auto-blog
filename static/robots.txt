@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# タグページ・RSSフィードはインデックス不要
+Disallow: /tags/
+Disallow: /*.xml$
+
 Sitemap: https://ai-navi-tools.net/sitemap.xml
