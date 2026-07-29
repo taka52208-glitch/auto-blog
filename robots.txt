@@ -1,8 +1,15 @@
 User-agent: *
 Allow: /
 
-# タグページ・RSSフィードはインデックス不要
+# タグページはインデックス不要
 Disallow: /tags/
-Disallow: /*.xml$
+
+# RSS フィード（Hugo が生成する index.xml）はインデックス不要。
+# 以前は `Disallow: /*.xml$` としていたが、このパターンは末尾一致のため
+# /sitemap.xml にも一致し、下で宣言しているサイトマップ自身を
+# ブロックしてしまっていた（Search Console「robots.txt によりブロックされました」）。
+# フィードのファイル名で限定する。
+Disallow: /index.xml
+Disallow: /*/index.xml
 
 Sitemap: https://ai-navi-tools.net/sitemap.xml
